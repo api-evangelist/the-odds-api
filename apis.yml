@@ -1,27 +1,43 @@
 aid: the-odds-api
 name: The Odds API
-description: 'Sports betting APIcovering odds from bookmakersaround the world '
+description: Sports betting API covering odds from bookmakers around the world.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Sports
+  - Betting
+  - Odds
 created: '2025-02-08'
-modified: '2025-02-08'
+modified: '2026-03-16'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/the-odds-api/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: the-odds-api:the-odds-api
     name: The Odds API
-    description: 'Sports betting APIcovering odds from bookmakersaround the world '
-    humanURL: ' https://the-odds-api.com/'
+    description: Sports betting API covering odds from bookmakers around the world.
+    humanURL: https://the-odds-api.com/
+    baseURL: https://api.the-odds-api.com/v4
     tags:
-      - API
+      - Sports
+      - Betting
+      - Odds
     properties:
       - type: Documentation
-        url: ' https://the-odds-api.com/'
+        url: https://the-odds-api.com/liveapi/guides/v4/
+      - type: Getting Started
+        url: https://the-odds-api.com/liveapi/guides/v4/
+common:
+  - type: Website
+    url: https://the-odds-api.com/
+  - type: Documentation
+    url: https://the-odds-api.com/liveapi/guides/v4/
+  - type: Sign Up
+    url: https://the-odds-api.com/#get-access
+  - type: GitHub Organization
+    url: https://github.com/the-odds-api
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
