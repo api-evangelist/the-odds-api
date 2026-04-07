@@ -6,9 +6,9 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Sports
   - Betting
   - Odds
+  - Sports
 created: '2025-02-08'
 modified: '2026-03-16'
 url: >-
@@ -21,9 +21,9 @@ apis:
     humanURL: https://the-odds-api.com/
     baseURL: https://api.the-odds-api.com/v4
     tags:
-      - Sports
       - Betting
       - Odds
+      - Sports
     properties:
       - type: Documentation
         url: https://the-odds-api.com/liveapi/guides/v4/
