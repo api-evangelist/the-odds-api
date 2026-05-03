@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/the-odds-api/main/json-schema/the-odds-api-event-schema.json",
+  "title": "The Odds API Event",
+  "description": "A sporting event with betting odds from multiple bookmakers.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier."
+    },
+    "sport_key": {
+      "type": "string",
+      "description": "Sport identifier key (e.g., basketball_nba, americanfootball_nfl)."
+    },
+    "sport_title": {
+      "type": "string",
+      "description": "Human-readable sport title (e.g., NBA, NFL)."
+    },
+    "commence_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled start time of the event (ISO 8601 or Unix depending on dateFormat)."
+    },
+    "home_team": {
+      "type": "string",
+      "description": "Name of the home team."
+    },
+    "away_team": {
+      "type": "string",
+      "description": "Name of the away team."
+    },
+    "bookmakers": {
+      "type": "array",
+      "description": "List of bookmakers providing odds for this event.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Bookmaker identifier (e.g., draftkings, fanduel, betmgm)."
+          },
+          "title": {
+            "type": "string",
+            "description": "Bookmaker display name."
+          },
+          "last_update": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this bookmaker's odds were last refreshed."
+          },
+          "markets": {
+            "type": "array",
+            "description": "Betting markets offered by this bookmaker.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "Market key: h2h (moneyline), spreads, totals, outrights."
+                },
+                "last_update": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Market-level last update timestamp."
+                },
+                "outcomes": {
+                  "type": "array",
+                  "description": "Betting outcomes with prices.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Team or player name, or 'Over'/'Under' for totals."
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Additional description for the outcome."
+                      },
+                      "price": {
+                        "type": "number",
+                        "description": "Odds price in the requested format (decimal or american)."
+                      },
+                      "point": {
+                        "type": "number",
+                        "description": "Point spread or total line value (for spreads and totals)."
+                      }
+                    },
+                    "required": ["name", "price"]
+                  }
+                }
+              },
+              "required": ["key", "outcomes"]
+            }
+          }
+        },
+        "required": ["key", "title", "markets"]
+      }
+    }
+  },
+  "required": ["id", "sport_key", "commence_time", "home_team", "away_team"],
+  "additionalProperties": true
+}

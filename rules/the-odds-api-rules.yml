@@ -1,0 +1,112 @@
+extends: spectral:oas
+rules:
+
+  # API key must be required on all operations
+  odds-api-key-required:
+    description: All Odds API operations must require the apiKey parameter.
+    message: "Operation must include the apiKey query parameter."
+    severity: error
+    given: "$.paths.*.*.parameters"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name:
+                const: apiKey
+
+  # Summaries must use Title Case
+  odds-api-summary-title-case:
+    description: Operation summaries must use Title Case.
+    message: "Summary should begin with a capital letter."
+    severity: warn
+    given: "$.paths.*.*.summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  # All operations must have summaries
+  odds-api-summary-exists:
+    description: All Odds API operations must have a summary.
+    message: "Operation is missing a summary."
+    severity: error
+    given: "$.paths.*.*"
+    then:
+      function: truthy
+      field: summary
+
+  # All operations must have tags
+  odds-api-tags-exist:
+    description: All operations must have at least one tag.
+    message: "Operation must include at least one tag."
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      function: truthy
+      field: tags
+
+  # 200 responses required
+  odds-api-response-200:
+    description: All operations must define a 200 response.
+    message: "Operation must define a 200 response."
+    severity: error
+    given: "$.paths.*.*.responses"
+    then:
+      function: truthy
+      field: "200"
+
+  # 401 response required (api key protected)
+  odds-api-response-401:
+    description: Operations should define a 401 Unauthorized response for API key errors.
+    message: "Consider defining a 401 response."
+    severity: warn
+    given: "$.paths.*.*.responses"
+    then:
+      function: truthy
+      field: "401"
+
+  # Server should use HTTPS
+  odds-api-server-https:
+    description: Server URLs should use HTTPS.
+    message: "Server URL should use HTTPS."
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  # Path parameters must be described
+  odds-api-path-param-descriptions:
+    description: Path parameters must have descriptions.
+    message: "Parameter is missing a description."
+    severity: warn
+    given: "$.paths.*.*.parameters[*]"
+    then:
+      function: truthy
+      field: description
+
+  # OperationId must be camelCase
+  odds-api-operation-id-camel-case:
+    description: operationId should use camelCase.
+    message: "operationId '{{value}}' should use camelCase."
+    severity: hint
+    given: "$.paths.*.*.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # Responses should include application/json
+  odds-api-json-response:
+    description: 200 responses should return application/json.
+    message: "200 response should include application/json content type."
+    severity: warn
+    given: "$.paths.*.*.responses.200.content"
+    then:
+      function: truthy
+      field: "application/json"

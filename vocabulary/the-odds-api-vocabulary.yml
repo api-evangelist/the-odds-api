@@ -1,0 +1,142 @@
+vocabulary: the-odds-api
+description: >-
+  Vocabulary and taxonomy for The Odds API covering sports betting markets,
+  odds formats, bookmaker terminology, and data structures.
+version: "1.0"
+created: "2026-05-03"
+modified: "2026-05-03"
+
+domains:
+  - name: Betting Markets
+    description: Types of betting markets available through The Odds API.
+    terms:
+      - term: h2h
+        definition: "Head-to-head (moneyline) market. Bet on which team or player wins the game outright."
+        aliases: ["moneyline", "match result"]
+      - term: spreads
+        definition: "Point spread (handicap) market. One team must win by a specified margin (the spread) for the bet to win."
+        aliases: ["point spread", "handicap", "AH"]
+      - term: totals
+        definition: "Over/Under market. Bet on whether the combined score of both teams will be over or under a specified total."
+        aliases: ["over/under", "O/U"]
+      - term: outrights
+        definition: "Futures/outright winner market. Bet on which team or player will win a tournament or competition."
+        aliases: ["futures", "ante-post", "winner market"]
+      - term: h2h_lay
+        definition: "Lay odds on exchanges (e.g., Betfair). The lay price is what back bettors receive. Automatically included for exchange bookmakers."
+      - term: player_props
+        definition: "Player proposition bets on individual player performance metrics. Available via event-specific endpoints."
+
+  - name: Odds Formats
+    description: Supported odds representation formats.
+    terms:
+      - term: decimal
+        definition: "European decimal odds format. Includes the stake in the return (e.g., 2.50 means $2.50 returned on a $1 stake, $1.50 profit)."
+      - term: american
+        definition: "American (moneyline) odds format. Positive values show profit on a $100 stake; negative values show stake needed to profit $100."
+
+  - name: Regions
+    description: Geographic regions for bookmaker coverage.
+    terms:
+      - term: us
+        definition: "United States bookmakers including DraftKings, FanDuel, BetMGM, Caesars, PointsBet, and others."
+      - term: us2
+        definition: "Additional US bookmakers not included in the 'us' region."
+      - term: uk
+        definition: "United Kingdom bookmakers including Bet365, William Hill, Betway, Unibet, and others."
+      - term: au
+        definition: "Australian bookmakers including Sportsbet, Tab, Ladbrokes, and others."
+      - term: eu
+        definition: "European bookmakers including Betfair, Pinnacle, Unibet (EU), and others."
+
+  - name: Sport Keys
+    description: Common sport key values used in API paths.
+    terms:
+      - term: basketball_nba
+        definition: "NBA (National Basketball Association) — US professional basketball."
+      - term: americanfootball_nfl
+        definition: "NFL (National Football League) — US professional American football."
+      - term: baseball_mlb
+        definition: "MLB (Major League Baseball) — US professional baseball."
+      - term: icehockey_nhl
+        definition: "NHL (National Hockey League) — US/Canadian professional ice hockey."
+      - term: soccer_epl
+        definition: "English Premier League — top-flight English football/soccer."
+      - term: soccer_uefa_champs_league
+        definition: "UEFA Champions League — European club football."
+      - term: tennis_atp_us_open
+        definition: "US Open Tennis (ATP) — Grand Slam tennis."
+      - term: mma_mixed_martial_arts
+        definition: "Mixed Martial Arts events (UFC and other promotions)."
+      - term: upcoming
+        definition: "Special sport key returning upcoming events across all sports."
+
+  - name: Event Fields
+    description: Fields in event and odds responses.
+    terms:
+      - term: id
+        definition: "Unique event identifier. Stable across multiple API requests for the same event."
+      - term: sport_key
+        definition: "Sport identifier used in API paths (e.g., basketball_nba)."
+      - term: commence_time
+        definition: "Scheduled start time of the event in ISO 8601 or Unix format."
+      - term: home_team
+        definition: "Name of the home team."
+      - term: away_team
+        definition: "Name of the away team."
+      - term: bookmakers
+        definition: "Array of bookmakers offering odds for this event."
+      - term: last_update
+        definition: "Timestamp of the most recent odds update from a bookmaker."
+      - term: outcomes
+        definition: "Array of betting outcomes (team names with prices) for a market."
+      - term: point
+        definition: "The point spread or total line value in spreads and totals markets."
+      - term: price
+        definition: "The odds price for an outcome in the requested format (decimal or american)."
+
+  - name: Scores Fields
+    description: Fields in the scores endpoint response.
+    terms:
+      - term: completed
+        definition: "Boolean indicating whether the game has finished."
+      - term: scores
+        definition: "Array of team scores. Null before the game starts."
+      - term: last_update
+        definition: "When the live score was last refreshed (approx every 30 seconds)."
+
+  - name: Quota
+    description: API quota consumption rules.
+    terms:
+      - term: credits
+        definition: "Unit of API quota consumption. Each plan provides a monthly credit allowance."
+      - term: x-requests-remaining
+        definition: "Response header showing remaining quota credits for the period."
+      - term: x-requests-used
+        definition: "Response header showing total credits used since quota reset."
+      - term: x-requests-last
+        definition: "Response header showing credits consumed by the most recent request."
+      - term: free-endpoint
+        definition: "Endpoints that do not consume quota: /v4/sports and /v4/sports/{sport}/events."
+
+  - name: Historical Data
+    description: Terms specific to the historical odds endpoints.
+    terms:
+      - term: timestamp
+        definition: "The exact timestamp of a historical snapshot returned in the response."
+      - term: previous_timestamp
+        definition: "Timestamp of the preceding available snapshot for sequential navigation."
+      - term: next_timestamp
+        definition: "Timestamp of the following available snapshot."
+      - term: snapshot-interval
+        definition: "Historical odds are available at 10-minute intervals before September 2022 and 5-minute intervals thereafter."
+
+tags:
+  - Sports Betting
+  - Odds
+  - Scores
+  - Bookmakers
+  - Markets
+  - Historical Data
+  - Live Data
+  - Sports

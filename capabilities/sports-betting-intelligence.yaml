@@ -1,0 +1,248 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sports Betting Intelligence"
+  description: "Comprehensive workflow for sports betting research, odds comparison, and line movement analysis. Combines live odds from multiple bookmakers, real-time scores, event discovery, and historical odds data. Used by bettors, analysts, trading desks, and developers building sports betting applications."
+  tags:
+    - Sports Betting
+    - Odds Comparison
+    - Line Movement
+    - Live Scores
+    - Historical Analysis
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      ODDS_API_KEY: ODDS_API_KEY
+
+capability:
+  consumes:
+    - import: the-odds-api
+      location: ./shared/the-odds-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sports-betting-intelligence-api
+      description: "Unified REST API for sports betting intelligence and odds analysis."
+      resources:
+        - path: /v1/sports
+          name: sports
+          description: "Available sports with active event coverage."
+          operations:
+            - method: GET
+              name: get-sports
+              description: "List all available sports with their keys and descriptions."
+              call: "the-odds-api.get-sports"
+              with:
+                all: "rest.all"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/sports/{sport}/odds
+          name: odds
+          description: "Live odds from multiple bookmakers."
+          operations:
+            - method: GET
+              name: get-sport-odds
+              description: "Get current odds from bookmakers for comparison."
+              call: "the-odds-api.get-sport-odds"
+              with:
+                sport: "rest.sport"
+                regions: "rest.regions"
+                markets: "rest.markets"
+                oddsFormat: "rest.oddsFormat"
+                commenceTimeFrom: "rest.commenceTimeFrom"
+                commenceTimeTo: "rest.commenceTimeTo"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/sports/{sport}/scores
+          name: scores
+          description: "Live and recent game scores."
+          operations:
+            - method: GET
+              name: get-sport-scores
+              description: "Get live scores updated every 30 seconds."
+              call: "the-odds-api.get-sport-scores"
+              with:
+                sport: "rest.sport"
+                daysFrom: "rest.daysFrom"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/sports/{sport}/events
+          name: events
+          description: "Upcoming events for a sport."
+          operations:
+            - method: GET
+              name: get-sport-events
+              description: "Get upcoming event IDs for a sport."
+              call: "the-odds-api.get-sport-events"
+              with:
+                sport: "rest.sport"
+                commenceTimeFrom: "rest.commenceTimeFrom"
+                commenceTimeTo: "rest.commenceTimeTo"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/sports/{sport}/events/{eventId}/odds
+          name: event-odds
+          description: "All markets for a specific event."
+          operations:
+            - method: GET
+              name: get-event-odds
+              description: "Get comprehensive odds for a single event."
+              call: "the-odds-api.get-event-odds"
+              with:
+                sport: "rest.sport"
+                eventId: "rest.eventId"
+                regions: "rest.regions"
+                markets: "rest.markets"
+                oddsFormat: "rest.oddsFormat"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/sports/{sport}/participants
+          name: participants
+          description: "Teams and players in a sport."
+          operations:
+            - method: GET
+              name: get-sport-participants
+              description: "Get teams or players in a sport."
+              call: "the-odds-api.get-sport-participants"
+              with:
+                sport: "rest.sport"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/historical/sports/{sport}/odds
+          name: historical-odds
+          description: "Historical odds snapshots."
+          operations:
+            - method: GET
+              name: get-historical-odds
+              description: "Get historical odds at a specific timestamp."
+              call: "the-odds-api.get-historical-odds"
+              with:
+                sport: "rest.sport"
+                date: "rest.date"
+                regions: "rest.regions"
+                markets: "rest.markets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: sports-betting-intelligence-mcp
+      transport: http
+      description: "MCP server for AI-assisted sports betting research and odds analysis."
+      tools:
+        - name: get-sports
+          description: "List all available sports with their API keys. Use this to discover which sports are available before requesting odds."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sports"
+          with:
+            all: "tools.all"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: get-sport-odds
+          description: "Get current betting odds for a sport from multiple bookmakers. Specify regions (us, uk, au, eu) and markets (h2h=moneyline, spreads=handicap, totals=over-under, outrights=futures)."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-odds"
+          with:
+            sport: "tools.sport"
+            regions: "tools.regions"
+            markets: "tools.markets"
+            oddsFormat: "tools.oddsFormat"
+            commenceTimeFrom: "tools.commenceTimeFrom"
+            commenceTimeTo: "tools.commenceTimeTo"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: get-sport-scores
+          description: "Get live and recent game scores for a sport. Scores update approximately every 30 seconds. Use daysFrom (1-3) to include recently completed games."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-scores"
+          with:
+            sport: "tools.sport"
+            daysFrom: "tools.daysFrom"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: get-sport-events
+          description: "Get upcoming event IDs and metadata for a sport without consuming odds quota."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-events"
+          with:
+            sport: "tools.sport"
+            commenceTimeFrom: "tools.commenceTimeFrom"
+            commenceTimeTo: "tools.commenceTimeTo"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: get-event-odds
+          description: "Get all available betting markets for a specific event including player props, alternate lines, and period markets."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-event-odds"
+          with:
+            sport: "tools.sport"
+            eventId: "tools.eventId"
+            regions: "tools.regions"
+            markets: "tools.markets"
+            oddsFormat: "tools.oddsFormat"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-sport-participants
+          description: "Get the complete list of teams or players in a sport for reference."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-participants"
+          with:
+            sport: "tools.sport"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: get-historical-odds
+          description: "Get historical betting odds at a specific timestamp for line movement analysis. Available from June 2020 at 5-10 minute intervals."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-historical-odds"
+          with:
+            sport: "tools.sport"
+            date: "tools.date"
+            regions: "tools.regions"
+            markets: "tools.markets"
+            oddsFormat: "tools.oddsFormat"
+          outputParameters:
+            - type: object
+              mapping: "$."

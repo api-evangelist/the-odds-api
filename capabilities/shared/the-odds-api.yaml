@@ -1,0 +1,425 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "The Odds API"
+  description: "Sports betting odds from 40+ major bookmakers worldwide. Access current and historical odds for H2H, spreads, totals, and outrights across 100+ sports. Also provides live scores, events, and participants."
+  tags:
+    - Sports Betting
+    - Odds
+    - Scores
+    - Bookmakers
+    - Sports
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      ODDS_API_KEY: ODDS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: the-odds-api
+      baseUri: https://api.the-odds-api.com/v4
+      description: "The Odds API providing sports betting odds, scores, and events."
+      authentication:
+        type: apikey
+        key: apiKey
+        value: "{{ODDS_API_KEY}}"
+        placement: query
+      resources:
+        - name: sports
+          path: /sports
+          description: "List all available sports."
+          operations:
+            - name: get-sports
+              method: GET
+              description: "Get all available sports and their keys. Free — no quota consumed."
+              inputParameters:
+                - name: all
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Include out-of-season sports when true."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: odds
+          path: /sports/{sport}/odds
+          description: "Get current odds for a sport from multiple bookmakers."
+          operations:
+            - name: get-sport-odds
+              method: GET
+              description: "Get current betting odds for a sport. Cost: 1 credit per region per market."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key (e.g., basketball_nba) or 'upcoming'."
+                - name: regions
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated regions: us, us2, uk, au, eu."
+                - name: markets
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated markets: h2h, spreads, totals, outrights."
+                - name: oddsFormat
+                  in: query
+                  type: string
+                  required: false
+                  description: "Odds format: decimal or american."
+                - name: dateFormat
+                  in: query
+                  type: string
+                  required: false
+                  description: "Date format: iso or unix."
+                - name: commenceTimeFrom
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter events starting after this ISO 8601 datetime."
+                - name: commenceTimeTo
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter events starting before this ISO 8601 datetime."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: scores
+          path: /sports/{sport}/scores
+          description: "Get live and recent game scores."
+          operations:
+            - name: get-sport-scores
+              method: GET
+              description: "Get live and recent scores. Cost: 1 credit (2 with daysFrom)."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key from /v4/sports."
+                - name: daysFrom
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Include completed games from 1-3 days ago."
+                - name: dateFormat
+                  in: query
+                  type: string
+                  required: false
+                  description: "Date format: iso or unix."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: events
+          path: /sports/{sport}/events
+          description: "Get event IDs without odds. Free endpoint."
+          operations:
+            - name: get-sport-events
+              method: GET
+              description: "Get upcoming event IDs and metadata. Free — no quota consumed."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key from /v4/sports."
+                - name: commenceTimeFrom
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter events starting after this datetime."
+                - name: commenceTimeTo
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter events starting before this datetime."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: event-odds
+          path: /sports/{sport}/events/{eventId}/odds
+          description: "Get all markets for a specific event."
+          operations:
+            - name: get-event-odds
+              method: GET
+              description: "Get comprehensive odds for a single event including player props."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key."
+                - name: eventId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Event ID from /v4/sports/{sport}/events."
+                - name: regions
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated regions."
+                - name: markets
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated markets."
+                - name: oddsFormat
+                  in: query
+                  type: string
+                  required: false
+                  description: "Odds format: decimal or american."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: participants
+          path: /sports/{sport}/participants
+          description: "List teams or players in a sport."
+          operations:
+            - name: get-sport-participants
+              method: GET
+              description: "Get teams or players participating in a sport. Cost: 1 credit."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: array
+                  value: "$."
+
+        - name: historical-odds
+          path: /historical/sports/{sport}/odds
+          description: "Get historical odds at a specific timestamp."
+          operations:
+            - name: get-historical-odds
+              method: GET
+              description: "Get odds snapshot at a historical timestamp. Cost: 10 credits per region per market."
+              inputParameters:
+                - name: sport
+                  in: path
+                  type: string
+                  required: true
+                  description: "Sport key."
+                - name: date
+                  in: query
+                  type: string
+                  required: true
+                  description: "ISO 8601 timestamp for the historical snapshot."
+                - name: regions
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated regions."
+                - name: markets
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated markets."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: the-odds-api-rest
+      resources:
+        - path: /v1/sports
+          name: sports
+          description: "Available sports."
+          operations:
+            - method: GET
+              name: get-sports
+              description: "List all available sports."
+              call: "the-odds-api.get-sports"
+              with:
+                all: "rest.all"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/sports/{sport}/odds
+          name: sport-odds
+          description: "Current odds by sport."
+          operations:
+            - method: GET
+              name: get-sport-odds
+              description: "Get current odds for a sport from bookmakers."
+              call: "the-odds-api.get-sport-odds"
+              with:
+                sport: "rest.sport"
+                regions: "rest.regions"
+                markets: "rest.markets"
+                oddsFormat: "rest.oddsFormat"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/sports/{sport}/scores
+          name: sport-scores
+          description: "Live and recent scores."
+          operations:
+            - method: GET
+              name: get-sport-scores
+              description: "Get live and recent game scores."
+              call: "the-odds-api.get-sport-scores"
+              with:
+                sport: "rest.sport"
+                daysFrom: "rest.daysFrom"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/sports/{sport}/events
+          name: sport-events
+          description: "Upcoming events by sport."
+          operations:
+            - method: GET
+              name: get-sport-events
+              description: "Get upcoming event listings."
+              call: "the-odds-api.get-sport-events"
+              with:
+                sport: "rest.sport"
+                commenceTimeFrom: "rest.commenceTimeFrom"
+                commenceTimeTo: "rest.commenceTimeTo"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/sports/{sport}/events/{eventId}/odds
+          name: event-odds
+          description: "All markets for a specific event."
+          operations:
+            - method: GET
+              name: get-event-odds
+              description: "Get comprehensive odds for a single event."
+              call: "the-odds-api.get-event-odds"
+              with:
+                sport: "rest.sport"
+                eventId: "rest.eventId"
+                regions: "rest.regions"
+                markets: "rest.markets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: the-odds-api-mcp
+      transport: http
+      tools:
+        - name: get-sports
+          description: "List all available sports and their API keys for use in other requests."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sports"
+          with:
+            all: "tools.all"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-sport-odds
+          description: "Get current betting odds for a sport from multiple bookmakers. Specify regions (us, uk, au, eu) and markets (h2h, spreads, totals, outrights)."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-odds"
+          with:
+            sport: "tools.sport"
+            regions: "tools.regions"
+            markets: "tools.markets"
+            oddsFormat: "tools.oddsFormat"
+            commenceTimeFrom: "tools.commenceTimeFrom"
+            commenceTimeTo: "tools.commenceTimeTo"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-sport-scores
+          description: "Get live and recent game scores for a sport. Scores refresh every 30 seconds."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-scores"
+          with:
+            sport: "tools.sport"
+            daysFrom: "tools.daysFrom"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-sport-events
+          description: "Get upcoming event listings for a sport without odds data."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-events"
+          with:
+            sport: "tools.sport"
+            commenceTimeFrom: "tools.commenceTimeFrom"
+            commenceTimeTo: "tools.commenceTimeTo"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-event-odds
+          description: "Get all available betting markets for a specific event by event ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-event-odds"
+          with:
+            sport: "tools.sport"
+            eventId: "tools.eventId"
+            regions: "tools.regions"
+            markets: "tools.markets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-sport-participants
+          description: "Get the list of teams or players in a sport."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-sport-participants"
+          with:
+            sport: "tools.sport"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-historical-odds
+          description: "Get historical betting odds at a specific timestamp. Available from June 2020. Cost: 10 credits per region per market."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "the-odds-api.get-historical-odds"
+          with:
+            sport: "tools.sport"
+            date: "tools.date"
+            regions: "tools.regions"
+            markets: "tools.markets"
+          outputParameters:
+            - type: object
+              mapping: "$."

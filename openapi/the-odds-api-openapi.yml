@@ -1,0 +1,858 @@
+openapi: 3.0.3
+info:
+  title: The Odds API
+  description: >-
+    The Odds API provides sports betting odds from major bookmakers worldwide.
+    Access current and historical odds for head-to-head, spreads, totals, and
+    outrights markets across 100+ sports. Also provides live scores and event
+    listings. Requires an API key for all requests. Quota is consumed per
+    request based on number of regions and markets requested.
+  version: 4.0.0
+  contact:
+    url: https://the-odds-api.com/
+  termsOfService: https://the-odds-api.com/terms
+servers:
+  - url: https://api.the-odds-api.com
+    description: Primary API server
+  - url: https://ipv6-api.the-odds-api.com
+    description: IPv6 API server
+security:
+  - apiKey: []
+paths:
+  /v4/sports:
+    get:
+      operationId: getSports
+      summary: Get Available Sports
+      description: >-
+        Returns a list of available sports and their keys. Free endpoint — no
+        quota consumed. Use the all parameter to include out-of-season sports.
+      tags:
+        - Sports
+      parameters:
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: all
+          in: query
+          required: false
+          description: When true, includes out-of-season sports in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        "200":
+          description: List of available sports.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sport"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/sports/{sport}/odds:
+    get:
+      operationId: getSportOdds
+      summary: Get Sport Odds
+      description: >-
+        Returns current odds for a given sport from multiple bookmakers. Quota
+        cost: 1 credit per region per market. Use sport key from /v4/sports or
+        'upcoming' for cross-sport upcoming events.
+      tags:
+        - Odds
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: >-
+            Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl)
+            or 'upcoming' for cross-sport upcoming events.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: regions
+          in: query
+          required: true
+          description: >-
+            Comma-separated regions for bookmakers. Values: us, us2, uk, au, eu.
+            Quota: 1 credit per region per market.
+          schema:
+            type: string
+        - name: markets
+          in: query
+          required: false
+          description: >-
+            Comma-separated betting markets. Values: h2h, spreads, totals,
+            outrights. Defaults to h2h.
+          schema:
+            type: string
+            default: h2h
+        - name: oddsFormat
+          in: query
+          required: false
+          description: "Odds format. Values: decimal (default), american."
+          schema:
+            type: string
+            enum:
+              - decimal
+              - american
+            default: decimal
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format. Values: iso (default), unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+            default: iso
+        - name: bookmakers
+          in: query
+          required: false
+          description: >-
+            Comma-separated bookmaker IDs to filter results. Cannot be used with
+            regions parameter.
+          schema:
+            type: string
+        - name: eventIds
+          in: query
+          required: false
+          description: Comma-separated event IDs to filter results.
+          schema:
+            type: string
+        - name: commenceTimeFrom
+          in: query
+          required: false
+          description: Filter to events commencing after this ISO 8601 datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: commenceTimeTo
+          in: query
+          required: false
+          description: Filter to events commencing before this ISO 8601 datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: includeLinks
+          in: query
+          required: false
+          description: Include bookmaker deep-links to the event.
+          schema:
+            type: boolean
+        - name: includeBetLimits
+          in: query
+          required: false
+          description: Include maximum bet limit information where available.
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: List of events with odds from bookmakers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+          headers:
+            x-requests-remaining:
+              description: Remaining quota credits.
+              schema:
+                type: integer
+            x-requests-used:
+              description: Credits used since last quota reset.
+              schema:
+                type: integer
+            x-requests-last:
+              description: Credits consumed by this request.
+              schema:
+                type: integer
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/sports/{sport}/scores:
+    get:
+      operationId: getSportScores
+      summary: Get Sport Scores
+      description: >-
+        Returns live and recent scores for a given sport. Quota: 1 credit for
+        live scores only, 2 credits when using the daysFrom parameter.
+        Live scores refresh approximately every 30 seconds.
+      tags:
+        - Scores
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: daysFrom
+          in: query
+          required: false
+          description: >-
+            Include completed games from this many days ago (1-3). Adding this
+            increases cost to 2 credits.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format. Values: iso (default), unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+            default: iso
+        - name: eventIds
+          in: query
+          required: false
+          description: Comma-separated event IDs to filter results.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of events with score information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ScoreEvent"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/sports/{sport}/events:
+    get:
+      operationId: getSportEvents
+      summary: Get Sport Events
+      description: >-
+        Returns upcoming event IDs and metadata without odds data. Free endpoint
+        — no quota consumed.
+      tags:
+        - Events
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format. Values: iso (default), unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+        - name: eventIds
+          in: query
+          required: false
+          description: Comma-separated event IDs to filter.
+          schema:
+            type: string
+        - name: commenceTimeFrom
+          in: query
+          required: false
+          description: Filter events commencing after this ISO 8601 datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: commenceTimeTo
+          in: query
+          required: false
+          description: Filter events commencing before this ISO 8601 datetime.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: List of upcoming events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EventMeta"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/sports/{sport}/events/{eventId}/odds:
+    get:
+      operationId: getEventOdds
+      summary: Get Event Odds
+      description: >-
+        Returns all available markets for a specific event. Quota: 1 credit per
+        unique market returned per region. Provides comprehensive coverage for a
+        single event including player props and alternate lines.
+      tags:
+        - Odds
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          description: Event ID from /v4/sports/{sport}/events.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: regions
+          in: query
+          required: true
+          description: Comma-separated regions for bookmakers.
+          schema:
+            type: string
+        - name: markets
+          in: query
+          required: false
+          description: Comma-separated betting markets.
+          schema:
+            type: string
+        - name: oddsFormat
+          in: query
+          required: false
+          description: "Odds format: decimal or american."
+          schema:
+            type: string
+            enum:
+              - decimal
+              - american
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format: iso or unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+        - name: bookmakers
+          in: query
+          required: false
+          description: Comma-separated bookmaker IDs to include.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Event with comprehensive odds across all markets.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/sports/{sport}/participants:
+    get:
+      operationId: getSportParticipants
+      summary: Get Sport Participants
+      description: >-
+        Returns a list of teams or players participating in the specified sport.
+        Quota: 1 credit.
+      tags:
+        - Participants
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of participants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Participant"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/historical/sports/{sport}/odds:
+    get:
+      operationId: getHistoricalOdds
+      summary: Get Historical Sport Odds
+      description: >-
+        Returns a snapshot of odds at a specific historical timestamp. Available
+        from June 6, 2020 onwards at 10-minute intervals (5-minute from Sept
+        2022). Quota: 10 credits per region per market.
+      tags:
+        - Historical
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: date
+          in: query
+          required: true
+          description: >-
+            ISO 8601 timestamp for the historical snapshot
+            (e.g., 2023-09-16T12:00:00Z).
+          schema:
+            type: string
+            format: date-time
+        - name: regions
+          in: query
+          required: true
+          description: Comma-separated regions for bookmakers.
+          schema:
+            type: string
+        - name: markets
+          in: query
+          required: false
+          description: Comma-separated betting markets.
+          schema:
+            type: string
+        - name: oddsFormat
+          in: query
+          required: false
+          description: "Odds format: decimal or american."
+          schema:
+            type: string
+            enum:
+              - decimal
+              - american
+        - name: bookmakers
+          in: query
+          required: false
+          description: Comma-separated bookmaker IDs.
+          schema:
+            type: string
+        - name: eventIds
+          in: query
+          required: false
+          description: Comma-separated event IDs to filter.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Historical odds snapshot with navigation timestamps.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalOddsResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/historical/sports/{sport}/events:
+    get:
+      operationId: getHistoricalEvents
+      summary: Get Historical Sport Events
+      description: >-
+        Returns event data from a specific historical timestamp. Quota: 1 credit
+        (free if no results returned).
+      tags:
+        - Historical
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: date
+          in: query
+          required: true
+          description: ISO 8601 timestamp for the historical query.
+          schema:
+            type: string
+            format: date-time
+        - name: eventIds
+          in: query
+          required: false
+          description: Comma-separated event IDs to filter.
+          schema:
+            type: string
+        - name: commenceTimeFrom
+          in: query
+          required: false
+          description: Filter to events commencing after this datetime.
+          schema:
+            type: string
+            format: date-time
+        - name: commenceTimeTo
+          in: query
+          required: false
+          description: Filter to events commencing before this datetime.
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Historical event list with navigation timestamps.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalEventsResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: apiKey
+      in: query
+
+  schemas:
+    Sport:
+      type: object
+      description: A sport available for betting odds.
+      properties:
+        key:
+          type: string
+          description: "Unique identifier for the sport (e.g., basketball_nba)."
+        group:
+          type: string
+          description: "Sport group/category (e.g., Basketball, American Football)."
+        title:
+          type: string
+          description: "Human-readable title (e.g., NBA)."
+        description:
+          type: string
+          description: "Description of the sport or competition."
+        active:
+          type: boolean
+          description: "Whether the sport currently has events with odds."
+        has_outrights:
+          type: boolean
+          description: "Whether outrights/futures markets are available."
+
+    Outcome:
+      type: object
+      description: A betting outcome (team/player) with price.
+      properties:
+        name:
+          type: string
+          description: "Name of the team or player."
+        description:
+          type: string
+          description: "Additional description (e.g., Over, Under for totals)."
+        price:
+          type: number
+          description: "Odds price in the requested format."
+        point:
+          type: number
+          description: "Point spread or total line value (for spreads and totals markets)."
+
+    Market:
+      type: object
+      description: A betting market with outcomes from a bookmaker.
+      properties:
+        key:
+          type: string
+          description: "Market key (e.g., h2h, spreads, totals, outrights)."
+        last_update:
+          type: string
+          format: date-time
+          description: "When the market was last updated."
+        outcomes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Outcome"
+          description: "Available betting outcomes."
+
+    Bookmaker:
+      type: object
+      description: A bookmaker providing odds for an event.
+      properties:
+        key:
+          type: string
+          description: "Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm)."
+        title:
+          type: string
+          description: "Human-readable bookmaker name."
+        last_update:
+          type: string
+          format: date-time
+          description: "When this bookmaker's odds were last updated."
+        markets:
+          type: array
+          items:
+            $ref: "#/components/schemas/Market"
+          description: "Betting markets offered by this bookmaker."
+
+    Event:
+      type: object
+      description: A sporting event with odds from bookmakers.
+      properties:
+        id:
+          type: string
+          description: "Unique event identifier."
+        sport_key:
+          type: string
+          description: "Sport key for the event."
+        sport_title:
+          type: string
+          description: "Human-readable sport title."
+        commence_time:
+          type: string
+          format: date-time
+          description: "Scheduled start time of the event."
+        home_team:
+          type: string
+          description: "Home team name."
+        away_team:
+          type: string
+          description: "Away team name."
+        bookmakers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Bookmaker"
+          description: "List of bookmakers providing odds."
+
+    EventMeta:
+      type: object
+      description: Event metadata without odds.
+      properties:
+        id:
+          type: string
+          description: "Unique event identifier."
+        sport_key:
+          type: string
+          description: "Sport key."
+        sport_title:
+          type: string
+          description: "Sport title."
+        commence_time:
+          type: string
+          format: date-time
+          description: "Event start time."
+        home_team:
+          type: string
+          description: "Home team name."
+        away_team:
+          type: string
+          description: "Away team name."
+
+    Score:
+      type: object
+      description: Score for one team in a game.
+      properties:
+        name:
+          type: string
+          description: "Team name."
+        score:
+          type: string
+          description: "Current score."
+
+    ScoreEvent:
+      type: object
+      description: An event with live or recent score information.
+      properties:
+        id:
+          type: string
+          description: "Event identifier."
+        sport_key:
+          type: string
+          description: "Sport key."
+        sport_title:
+          type: string
+          description: "Sport title."
+        commence_time:
+          type: string
+          format: date-time
+          description: "Event start time."
+        completed:
+          type: boolean
+          description: "Whether the game has completed."
+        home_team:
+          type: string
+          description: "Home team name."
+        away_team:
+          type: string
+          description: "Away team name."
+        scores:
+          type: array
+          nullable: true
+          items:
+            $ref: "#/components/schemas/Score"
+          description: "Current scores for each team. Null if game hasn't started."
+        last_update:
+          type: string
+          format: date-time
+          nullable: true
+          description: "When the score was last updated."
+
+    Participant:
+      type: object
+      description: A team or player in a sport.
+      properties:
+        id:
+          type: string
+          description: "Participant identifier."
+        full_name:
+          type: string
+          description: "Full name of the team or player."
+
+    HistoricalOddsResponse:
+      type: object
+      description: Historical odds snapshot with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: "Actual timestamp of this snapshot."
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: "Timestamp of the previous available snapshot."
+        next_timestamp:
+          type: string
+          format: date-time
+          description: "Timestamp of the next available snapshot."
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Event"
+          description: "Events with odds as of the snapshot timestamp."
+
+    HistoricalEventsResponse:
+      type: object
+      description: Historical events with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: "Snapshot timestamp."
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: "Previous available snapshot timestamp."
+        next_timestamp:
+          type: string
+          format: date-time
+          description: "Next available snapshot timestamp."
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/EventMeta"
+          description: "Events as of the snapshot timestamp."
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: "Error description."
+
+  responses:
+    Unauthorized:
+      description: "Unauthorized — invalid or missing API key."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: "Not found — the requested event does not exist."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    UnprocessableEntity:
+      description: "Unprocessable entity — invalid parameter values."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    RateLimited:
+      description: "Too many requests — quota exceeded."
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+tags:
+  - name: Sports
+    description: Available sports and their keys.
+  - name: Odds
+    description: Current odds from bookmakers.
+  - name: Scores
+    description: Live and recent game scores.
+  - name: Events
+    description: Event listings without odds.
+  - name: Participants
+    description: Teams and players in a sport.
+  - name: Historical
+    description: Historical odds and event snapshots.

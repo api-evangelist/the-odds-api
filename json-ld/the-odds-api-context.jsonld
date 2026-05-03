@@ -1,0 +1,43 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "odds": "https://the-odds-api.com/vocabulary/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Event": "schema:SportsEvent",
+    "Sport": "schema:SportsOrganization",
+    "Bookmaker": "schema:Organization",
+    "Team": "schema:SportsTeam",
+
+    "id": "schema:identifier",
+    "sport_key": "odds:sportKey",
+    "sport_title": "schema:name",
+    "commence_time": { "@id": "schema:startDate", "@type": "xsd:dateTime" },
+    "home_team": { "@id": "odds:homeTeam", "@type": "schema:SportsTeam" },
+    "away_team": { "@id": "odds:awayTeam", "@type": "schema:SportsTeam" },
+    "bookmakers": "odds:bookmakers",
+    "markets": "odds:markets",
+    "outcomes": "odds:outcomes",
+
+    "key": "schema:identifier",
+    "title": "schema:name",
+    "last_update": { "@id": "schema:dateModified", "@type": "xsd:dateTime" },
+    "price": "odds:price",
+    "point": "odds:pointSpread",
+    "name": "schema:name",
+    "description": "schema:description",
+
+    "completed": "odds:completed",
+    "scores": "odds:scores",
+    "score": "odds:score",
+
+    "active": "odds:active",
+    "group": "schema:category",
+    "has_outrights": "odds:hasOutrights",
+
+    "timestamp": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+    "previous_timestamp": "odds:previousTimestamp",
+    "next_timestamp": "odds:nextTimestamp"
+  }
+}

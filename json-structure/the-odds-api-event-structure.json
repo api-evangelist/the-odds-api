@@ -1,0 +1,49 @@
+{
+  "name": "The Odds API Event",
+  "description": "Structure of a sporting event with odds from The Odds API.",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique event identifier." },
+    { "name": "sport_key", "type": "string", "required": true, "description": "Sport key (e.g., basketball_nba)." },
+    { "name": "sport_title", "type": "string", "required": false, "description": "Human-readable sport name (e.g., NBA)." },
+    { "name": "commence_time", "type": "string (date-time)", "required": true, "description": "Scheduled event start time." },
+    { "name": "home_team", "type": "string", "required": true, "description": "Home team name." },
+    { "name": "away_team", "type": "string", "required": true, "description": "Away team name." },
+    {
+      "name": "bookmakers",
+      "type": "array<Bookmaker>",
+      "required": false,
+      "description": "List of bookmakers providing odds.",
+      "items": {
+        "fields": [
+          { "name": "key", "type": "string", "description": "Bookmaker identifier (e.g., draftkings, fanduel)." },
+          { "name": "title", "type": "string", "description": "Bookmaker display name." },
+          { "name": "last_update", "type": "string (date-time)", "description": "When odds were last refreshed." },
+          {
+            "name": "markets",
+            "type": "array<Market>",
+            "description": "Betting markets offered.",
+            "items": {
+              "fields": [
+                { "name": "key", "type": "string", "description": "Market key: h2h, spreads, totals, outrights." },
+                { "name": "last_update", "type": "string (date-time)", "description": "Market last update." },
+                {
+                  "name": "outcomes",
+                  "type": "array<Outcome>",
+                  "description": "Betting outcomes.",
+                  "items": {
+                    "fields": [
+                      { "name": "name", "type": "string", "description": "Team/player or Over/Under." },
+                      { "name": "price", "type": "number", "description": "Odds price in decimal or american format." },
+                      { "name": "point", "type": "number", "description": "Spread or total line value." },
+                      { "name": "description", "type": "string", "description": "Additional outcome description." }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

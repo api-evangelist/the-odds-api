@@ -1,0 +1,76 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.the-odds-api.com/v4/sports/basketball_nba/odds",
+    "params": {
+      "apiKey": "YOUR_API_KEY",
+      "regions": "us",
+      "markets": "h2h,spreads",
+      "oddsFormat": "american",
+      "dateFormat": "iso"
+    }
+  },
+  "response_headers": {
+    "x-requests-remaining": "498",
+    "x-requests-used": "2",
+    "x-requests-last": "2"
+  },
+  "response": [
+    {
+      "id": "7f0348f75d9f3d3bda52be5a73ea3f7b",
+      "sport_key": "basketball_nba",
+      "sport_title": "NBA",
+      "commence_time": "2024-05-03T00:30:00Z",
+      "home_team": "Boston Celtics",
+      "away_team": "Miami Heat",
+      "bookmakers": [
+        {
+          "key": "draftkings",
+          "title": "DraftKings",
+          "last_update": "2024-05-02T23:45:00Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2024-05-02T23:45:00Z",
+              "outcomes": [
+                { "name": "Boston Celtics", "price": -280 },
+                { "name": "Miami Heat", "price": 230 }
+              ]
+            },
+            {
+              "key": "spreads",
+              "last_update": "2024-05-02T23:45:00Z",
+              "outcomes": [
+                { "name": "Boston Celtics", "price": -110, "point": -7.5 },
+                { "name": "Miami Heat", "price": -110, "point": 7.5 }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "fanduel",
+          "title": "FanDuel",
+          "last_update": "2024-05-02T23:42:00Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2024-05-02T23:42:00Z",
+              "outcomes": [
+                { "name": "Boston Celtics", "price": -270 },
+                { "name": "Miami Heat", "price": 220 }
+              ]
+            },
+            {
+              "key": "spreads",
+              "last_update": "2024-05-02T23:42:00Z",
+              "outcomes": [
+                { "name": "Boston Celtics", "price": -112, "point": -7.5 },
+                { "name": "Miami Heat", "price": -108, "point": 7.5 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
