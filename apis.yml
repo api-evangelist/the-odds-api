@@ -6,7 +6,7 @@ description: >-
   markets across 100+ sports. Endpoints cover live scores, event listings, participants,
   and historical odds snapshots dating back to June 2020. Quota is consumed per request
   based on the number of regions and markets requested. All requests require an API key.
-type: Contract
+kind: contract
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
@@ -41,9 +41,9 @@ apis:
     properties:
       - type: Documentation
         url: https://the-odds-api.com/liveapi/guides/v4/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://the-odds-api.com/liveapi/guides/v4/
-      - type: Sign Up
+      - type: SignUp
         url: https://the-odds-api.com/#get-access
       - type: OpenAPI
         url: openapi/the-odds-api-openapi.yml
@@ -53,9 +53,9 @@ common:
     url: https://the-odds-api.com/
   - type: Documentation
     url: https://the-odds-api.com/liveapi/guides/v4/
-  - type: Sign Up
+  - type: SignUp
     url: https://the-odds-api.com/#get-access
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/the-odds-api
   - type: SpectralRuleset
     url: rules/the-odds-api-rules.yml
