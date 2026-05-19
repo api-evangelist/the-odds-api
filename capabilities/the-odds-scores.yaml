@@ -1,0 +1,107 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: The Odds API — Scores
+  description: 'The Odds API — Scores. 1 operations. Lead operation: Get Sport Scores. Self-contained Naftiko capability covering
+    one The Odds Api business surface.'
+  tags:
+  - The Odds Api
+  - Scores
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_ODDS_API_API_KEY: THE_ODDS_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-odds-scores
+    baseUri: https://api.the-odds-api.com
+    description: The Odds API — Scores business capability. Self-contained, no shared references.
+    resources:
+    - name: v4-sports-sport-scores
+      path: /v4/sports/{sport}/scores
+      operations:
+      - name: getsportscores
+        method: GET
+        description: Get Sport Scores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sport
+          in: path
+          type: string
+          description: Sport key from /v4/sports.
+          required: true
+        - name: apiKey
+          in: query
+          type: string
+          description: Your API key.
+          required: true
+        - name: daysFrom
+          in: query
+          type: integer
+          description: Include completed games from this many days ago (1-3). Adding this increases cost to 2 credits.
+        - name: dateFormat
+          in: query
+          type: string
+          description: 'Date format. Values: iso (default), unix.'
+        - name: eventIds
+          in: query
+          type: string
+          description: Comma-separated event IDs to filter results.
+    authentication:
+      type: apikey
+      key: apiKey
+      value: '{{env.THE_ODDS_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-odds-scores-rest
+    port: 8080
+    description: REST adapter for The Odds API — Scores. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v4/sports/{sport}/scores
+      name: v4-sports-sport-scores
+      description: REST surface for v4-sports-sport-scores.
+      operations:
+      - method: GET
+        name: getsportscores
+        description: Get Sport Scores
+        call: the-odds-scores.getsportscores
+        with:
+          sport: rest.sport
+          apiKey: rest.apiKey
+          daysFrom: rest.daysFrom
+          dateFormat: rest.dateFormat
+          eventIds: rest.eventIds
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-odds-scores-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for The Odds API — Scores. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-sport-scores
+      description: Get Sport Scores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-odds-scores.getsportscores
+      with:
+        sport: tools.sport
+        apiKey: tools.apiKey
+        daysFrom: tools.daysFrom
+        dateFormat: tools.dateFormat
+        eventIds: tools.eventIds
+      outputParameters:
+      - type: object
+        mapping: $.

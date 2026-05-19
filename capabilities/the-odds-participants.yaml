@@ -1,0 +1,89 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: The Odds API — Participants
+  description: 'The Odds API — Participants. 1 operations. Lead operation: Get Sport Participants. Self-contained Naftiko
+    capability covering one The Odds Api business surface.'
+  tags:
+  - The Odds Api
+  - Participants
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_ODDS_API_API_KEY: THE_ODDS_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-odds-participants
+    baseUri: https://api.the-odds-api.com
+    description: The Odds API — Participants business capability. Self-contained, no shared references.
+    resources:
+    - name: v4-sports-sport-participants
+      path: /v4/sports/{sport}/participants
+      operations:
+      - name: getsportparticipants
+        method: GET
+        description: Get Sport Participants
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sport
+          in: path
+          type: string
+          description: Sport key from /v4/sports.
+          required: true
+        - name: apiKey
+          in: query
+          type: string
+          description: Your API key.
+          required: true
+    authentication:
+      type: apikey
+      key: apiKey
+      value: '{{env.THE_ODDS_API_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-odds-participants-rest
+    port: 8080
+    description: REST adapter for The Odds API — Participants. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v4/sports/{sport}/participants
+      name: v4-sports-sport-participants
+      description: REST surface for v4-sports-sport-participants.
+      operations:
+      - method: GET
+        name: getsportparticipants
+        description: Get Sport Participants
+        call: the-odds-participants.getsportparticipants
+        with:
+          sport: rest.sport
+          apiKey: rest.apiKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-odds-participants-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for The Odds API — Participants. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-sport-participants
+      description: Get Sport Participants
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-odds-participants.getsportparticipants
+      with:
+        sport: tools.sport
+        apiKey: tools.apiKey
+      outputParameters:
+      - type: object
+        mapping: $.
