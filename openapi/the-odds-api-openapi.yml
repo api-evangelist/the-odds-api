@@ -394,6 +394,70 @@ paths:
         "429":
           $ref: "#/components/responses/RateLimited"
 
+  /v4/sports/{sport}/events/{eventId}/markets:
+    get:
+      operationId: getEventMarkets
+      summary: Get Event Markets
+      description: >-
+        Returns the list of betting markets available for a specific event,
+        grouped by bookmaker. Useful for discovering which player props and
+        alternate lines are offered before requesting odds. Quota: 1 credit.
+      tags:
+        - Odds
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          description: Event ID from /v4/sports/{sport}/events.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: regions
+          in: query
+          required: true
+          description: Comma-separated regions for bookmakers.
+          schema:
+            type: string
+        - name: bookmakers
+          in: query
+          required: false
+          description: Comma-separated bookmaker IDs to include.
+          schema:
+            type: string
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format: iso or unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+      responses:
+        "200":
+          description: Available markets per bookmaker for the event.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
   /v4/sports/{sport}/participants:
     get:
       operationId: getSportParticipants
@@ -565,6 +629,87 @@ paths:
                 $ref: "#/components/schemas/HistoricalEventsResponse"
         "401":
           $ref: "#/components/responses/Unauthorized"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+
+  /v4/historical/sports/{sport}/events/{eventId}/odds:
+    get:
+      operationId: getHistoricalEventOdds
+      summary: Get Historical Event Odds
+      description: >-
+        Returns odds for a specific event at a historical snapshot timestamp.
+        Useful for backtesting, line-movement analysis, and reconstructing the
+        full market state of a single event. Quota: 1 credit per unique market
+        per region.
+      tags:
+        - Historical
+      parameters:
+        - name: sport
+          in: path
+          required: true
+          description: Sport key from /v4/sports.
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          description: Event ID for the historical snapshot.
+          schema:
+            type: string
+        - name: apiKey
+          in: query
+          required: true
+          description: Your API key.
+          schema:
+            type: string
+        - name: date
+          in: query
+          required: true
+          description: ISO 8601 timestamp for the historical snapshot.
+          schema:
+            type: string
+            format: date-time
+        - name: regions
+          in: query
+          required: true
+          description: Comma-separated regions for bookmakers.
+          schema:
+            type: string
+        - name: markets
+          in: query
+          required: false
+          description: Comma-separated betting markets (all market types accepted).
+          schema:
+            type: string
+        - name: oddsFormat
+          in: query
+          required: false
+          description: "Odds format: decimal or american."
+          schema:
+            type: string
+            enum:
+              - decimal
+              - american
+        - name: dateFormat
+          in: query
+          required: false
+          description: "Date format: iso or unix."
+          schema:
+            type: string
+            enum:
+              - iso
+              - unix
+      responses:
+        "200":
+          description: Historical event odds snapshot with timestamp navigation.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoricalEventOddsResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
         "429":
           $ref: "#/components/responses/RateLimited"
 
@@ -809,6 +954,25 @@ components:
           items:
             $ref: "#/components/schemas/EventMeta"
           description: "Events as of the snapshot timestamp."
+
+    HistoricalEventOddsResponse:
+      type: object
+      description: Historical odds snapshot for a single event with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: "Actual timestamp of this snapshot."
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: "Timestamp of the previous available snapshot."
+        next_timestamp:
+          type: string
+          format: date-time
+          description: "Timestamp of the next available snapshot."
+        data:
+          $ref: "#/components/schemas/Event"
 
     Error:
       type: object

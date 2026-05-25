@@ -15,7 +15,7 @@ tags:
   - Scores
   - Historical Data
 created: '2025-02-08'
-modified: '2026-05-19'
+modified: '2026-05-25'
 url: https://raw.githubusercontent.com/api-evangelist/the-odds-api/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -64,6 +64,14 @@ common:
     url: https://the-odds-api.com/#get-access
   - type: GitHubOrganization
     url: https://github.com/the-odds-api
+  - type: StatusPage
+    url: https://status.the-odds-api.com/
+  - type: Plans
+    url: plans/the-odds-api-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/the-odds-api-rate-limits.yml
+  - type: FinOps
+    url: finops/the-odds-api-finops.yml
   - type: SpectralRuleset
     url: rules/the-odds-api-rules.yml
   - type: JSONSchema
