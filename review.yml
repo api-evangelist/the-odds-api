@@ -1,0 +1,33 @@
+name: The Odds API
+description: The Odds API streaming surface review — assessment of whether the provider exposes a documented public real-time / push interface alongside its REST endpoints.
+url: https://raw.githubusercontent.com/api-evangelist/the-odds-api/refs/heads/main/review.yml
+created: '2026-05-29'
+modified: '2026-05-29'
+reviews:
+  - date: '2026-05-29'
+    rating: 2
+    summary: The Odds API is strictly REST-only and requires client-side polling. A full review of the v4 developer documentation at https://the-odds-api.com/liveapi/guides/v4/ surfaced no documented public streaming interface — no WebSocket, no Server-Sent Events (SSE), no gRPC streaming, no webhooks, no push notifications, and no change-feed endpoint. All eleven documented v4 endpoints (sports, odds, scores, events, single-event odds, single-event markets, participants, and the three historical equivalents) are request/response GETs against https://api.the-odds-api.com/v4. The docs note that live scores refresh approximately every 30 seconds, but consumers are explicitly expected to poll the REST surface to observe those updates; there is no server-initiated delivery channel. Quota is consumed per request (1 credit per region per market for current odds, 10 credits for historical odds), which further reinforces the polling-cost model. No streaming capability should be catalogued for this provider until the vendor publishes one.
+    findings:
+      streaming_surface: none
+      transport: REST over HTTPS
+      delivery_model: client polling
+      websocket: false
+      sse: false
+      grpc_streaming: false
+      webhooks: false
+      push_notifications: false
+      change_feed: false
+      documented_refresh_cadence: approximately 30 seconds for live scores (client must poll)
+      documentation_reviewed: https://the-odds-api.com/liveapi/guides/v4/
+      endpoints_reviewed:
+        - GET /v4/sports
+        - GET /v4/sports/{sport}/odds
+        - GET /v4/sports/{sport}/scores
+        - GET /v4/sports/{sport}/events
+        - GET /v4/sports/{sport}/events/{eventId}/odds
+        - GET /v4/sports/{sport}/events/{eventId}/markets
+        - GET /v4/sports/{sport}/participants
+        - GET /v4/historical/sports/{sport}/odds
+        - GET /v4/historical/sports/{sport}/events
+        - GET /v4/historical/sports/{sport}/events/{eventId}/odds
+      recommendation: Do not add a streaming capability or AsyncAPI artifact for The Odds API. Catalog only REST polling behavior. Re-review if the provider publishes a push/streaming interface in a future API version.
