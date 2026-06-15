@@ -1,0 +1,3460 @@
+{
+  "item": [
+    {
+      "id": "eae5bcc9-6639-4a03-854a-fd4cde933651",
+      "name": "Sports",
+      "description": {
+        "content": "Available sports and their keys.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "043e00d9-97b9-4da4-b8d0-c85ffad2131c",
+          "name": "Get Available Sports",
+          "request": {
+            "name": "Get Available Sports",
+            "description": {
+              "content": "Returns a list of available sports and their keys. Free endpoint — no quota consumed. Use the all parameter to include out-of-season sports.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "false",
+                  "description": "When true, includes out-of-season sports in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c37107f6-50fc-4ce4-8123-aa219af4b741",
+              "name": "List of available sports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key\": \"string\",\n    \"group\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"active\": false,\n    \"has_outrights\": false\n  },\n  {\n    \"key\": \"string\",\n    \"group\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"active\": true,\n    \"has_outrights\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe3ebb0-e029-47b6-9c7b-fef219c8d8e4",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e56c21b-0af6-4765-a0dd-d3f8b3a4f164",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "false"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3d33fbb1-144e-4ce4-a1a0-1b33abe43b35",
+      "name": "Odds",
+      "description": {
+        "content": "Current odds from bookmakers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c10440c-e107-4ae5-884f-0abd1dca6fc7",
+          "name": "Get Sport Odds",
+          "request": {
+            "name": "Get Sport Odds",
+            "description": {
+              "content": "Returns current odds for a given sport from multiple bookmakers. Quota cost: 1 credit per region per market. Use sport key from /v4/sports or 'upcoming' for cross-sport upcoming events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "odds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated regions for bookmakers. Values: us, us2, uk, au, eu. Quota: 1 credit per region per market."
+                },
+                {
+                  "disabled": false,
+                  "key": "markets",
+                  "value": "h2h",
+                  "description": "Comma-separated betting markets. Values: h2h, spreads, totals, outrights. Defaults to h2h."
+                },
+                {
+                  "disabled": false,
+                  "key": "oddsFormat",
+                  "value": "decimal",
+                  "description": "Odds format. Values: decimal (default), american."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "iso",
+                  "description": "Date format. Values: iso (default), unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "bookmakers",
+                  "value": "<string>",
+                  "description": "Comma-separated bookmaker IDs to filter results. Cannot be used with regions parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeFrom",
+                  "value": "<dateTime>",
+                  "description": "Filter to events commencing after this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeTo",
+                  "value": "<dateTime>",
+                  "description": "Filter to events commencing before this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeLinks",
+                  "value": "<boolean>",
+                  "description": "Include bookmaker deep-links to the event."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeBetLimits",
+                  "value": "<boolean>",
+                  "description": "Include maximum bet limit information where available."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b570f0b2-6c2d-4320-8b2a-e1cd9213f71d",
+              "name": "List of events with odds from bookmakers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "h2h"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "decimal"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeLinks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeBetLimits",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Remaining quota credits.",
+                  "key": "x-requests-remaining",
+                  "value": "116"
+                },
+                {
+                  "disabled": false,
+                  "description": "Credits used since last quota reset.",
+                  "key": "x-requests-used",
+                  "value": "116"
+                },
+                {
+                  "disabled": false,
+                  "description": "Credits consumed by this request.",
+                  "key": "x-requests-last",
+                  "value": "116"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"2014-02-14T18:18:11.699Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"bookmakers\": [\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1988-05-02T14:24:13.453Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1949-06-24T11:58:16.565Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1951-10-06T16:13:44.506Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1962-04-23T02:42:45.599Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1977-06-02T02:44:51.186Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2002-08-26T05:27:23.690Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1997-12-01T14:49:28.757Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"bookmakers\": [\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1976-01-09T10:56:52.704Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2022-06-04T07:12:39.928Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1954-01-10T11:17:15.640Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1987-01-05T08:46:38.890Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1961-08-30T19:36:28.025Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2005-08-20T10:22:29.927Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58bde2b3-5528-4c7f-b661-6a409fdf2757",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "h2h"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "decimal"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeLinks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeBetLimits",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fae8b55-acff-43a1-8da7-d813a2a4d717",
+              "name": "Unprocessable entity — invalid parameter values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "h2h"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "decimal"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeLinks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeBetLimits",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b94623f-20e2-4d69-9135-24351fe28f33",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "h2h"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "decimal"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "includeLinks",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeBetLimits",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06146c7a-a217-48eb-958f-568e4c1658ed",
+          "name": "Get Event Odds",
+          "request": {
+            "name": "Get Event Odds",
+            "description": {
+              "content": "Returns all available markets for a specific event. Quota: 1 credit per unique market returned per region. Provides comprehensive coverage for a single event including player props and alternate lines.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "events",
+                ":eventId",
+                "odds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated regions for bookmakers."
+                },
+                {
+                  "disabled": false,
+                  "key": "markets",
+                  "value": "<string>",
+                  "description": "Comma-separated betting markets."
+                },
+                {
+                  "disabled": false,
+                  "key": "oddsFormat",
+                  "value": "<string>",
+                  "description": "Odds format: decimal or american."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "<string>",
+                  "description": "Date format: iso or unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "bookmakers",
+                  "value": "<string>",
+                  "description": "Comma-separated bookmaker IDs to include."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fba1e251-6f60-4a6c-b2c6-f310635bf485",
+              "name": "Event with comprehensive odds across all markets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"sport_key\": \"string\",\n  \"sport_title\": \"string\",\n  \"commence_time\": \"2026-02-05T21:33:03.990Z\",\n  \"home_team\": \"string\",\n  \"away_team\": \"string\",\n  \"bookmakers\": [\n    {\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"last_update\": \"2012-02-29T10:53:43.335Z\",\n      \"markets\": [\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1986-05-05T03:06:52.780Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1964-08-11T08:18:59.925Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"last_update\": \"1985-10-30T11:44:26.014Z\",\n      \"markets\": [\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1978-12-07T13:28:32.549Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"last_update\": \"2017-12-29T00:58:21.268Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d7d1dde-b9da-445c-ae22-8409d73624f1",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b534840-d4e3-472f-829c-516b108ed322",
+              "name": "Not found — the requested event does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86bd33d7-2ad1-4426-b182-47fef9e3549d",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "673a2524-6af9-4e1c-87e3-be5ed0b14323",
+          "name": "Get Event Markets",
+          "request": {
+            "name": "Get Event Markets",
+            "description": {
+              "content": "Returns the list of betting markets available for a specific event, grouped by bookmaker. Useful for discovering which player props and alternate lines are offered before requesting odds. Quota: 1 credit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "events",
+                ":eventId",
+                "markets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated regions for bookmakers."
+                },
+                {
+                  "disabled": false,
+                  "key": "bookmakers",
+                  "value": "<string>",
+                  "description": "Comma-separated bookmaker IDs to include."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "<string>",
+                  "description": "Date format: iso or unix."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "987b2520-f9a2-4c45-b173-4610b0be07bc",
+              "name": "Available markets per bookmaker for the event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"sport_key\": \"string\",\n  \"sport_title\": \"string\",\n  \"commence_time\": \"2026-02-05T21:33:03.990Z\",\n  \"home_team\": \"string\",\n  \"away_team\": \"string\",\n  \"bookmakers\": [\n    {\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"last_update\": \"2012-02-29T10:53:43.335Z\",\n      \"markets\": [\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1986-05-05T03:06:52.780Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1964-08-11T08:18:59.925Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"key\": \"string\",\n      \"title\": \"string\",\n      \"last_update\": \"1985-10-30T11:44:26.014Z\",\n      \"markets\": [\n        {\n          \"key\": \"string\",\n          \"last_update\": \"1978-12-07T13:28:32.549Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"last_update\": \"2017-12-29T00:58:21.268Z\",\n          \"outcomes\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff9ea061-efc2-4a25-8db5-3ff5a48562c1",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76f3f952-0b6f-464d-8ced-3acb69aa4e6b",
+              "name": "Not found — the requested event does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30338ec8-de7d-45d4-a94b-b3ee1e2409b2",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "markets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID from /v4/sports/{sport}/events."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "43ddf3cf-835a-4f66-850c-444ec4d8f954",
+      "name": "Scores",
+      "description": {
+        "content": "Live and recent game scores.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4e92380-65af-497f-8aed-9d4b8ba263d0",
+          "name": "Get Sport Scores",
+          "request": {
+            "name": "Get Sport Scores",
+            "description": {
+              "content": "Returns live and recent scores for a given sport. Quota: 1 credit for live scores only, 2 credits when using the daysFrom parameter. Live scores refresh approximately every 30 seconds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "scores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "daysFrom",
+                  "value": "<integer>",
+                  "description": "Include completed games from this many days ago (1-3). Adding this increases cost to 2 credits."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "iso",
+                  "description": "Date format. Values: iso (default), unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1a9b0d3-98db-4b11-8dee-7d502537e41b",
+              "name": "List of events with score information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1971-12-01T22:33:21.758Z\",\n    \"completed\": false,\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"scores\": [\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      }\n    ],\n    \"last_update\": \"1950-11-06T23:15:56.631Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1992-04-26T21:07:58.749Z\",\n    \"completed\": true,\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"scores\": [\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      }\n    ],\n    \"last_update\": \"1972-11-18T14:53:15.013Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9fe277f-095b-4db8-826a-a3df1cb7aace",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f3c33ca-27f9-4329-a66e-64985e438bcd",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4f5f381b-bf85-4547-aca7-f9c40c0887cd",
+      "name": "Events",
+      "description": {
+        "content": "Event listings without odds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4bce104-07da-409b-8d8f-cabb7c06aa58",
+          "name": "Get Sport Events",
+          "request": {
+            "name": "Get Sport Events",
+            "description": {
+              "content": "Returns upcoming event IDs and metadata without odds data. Free endpoint — no quota consumed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "<string>",
+                  "description": "Date format. Values: iso (default), unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeFrom",
+                  "value": "<dateTime>",
+                  "description": "Filter events commencing after this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeTo",
+                  "value": "<dateTime>",
+                  "description": "Filter events commencing before this ISO 8601 datetime."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9a83929-70b3-4622-9b76-0b33e7a61f77",
+              "name": "List of upcoming events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1998-07-14T07:44:44.491Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"2011-10-08T05:53:44.022Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7a928fe-decd-4d30-9877-d02825870528",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "288407e6-30f8-4fd5-a8ef-a5eb7875352b",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fda6ea53-ad5a-4738-83d0-4ac6d34c21a7",
+      "name": "Participants",
+      "description": {
+        "content": "Teams and players in a sport.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81514e68-6c63-4a81-a37c-9f5792173cef",
+          "name": "Get Sport Participants",
+          "request": {
+            "name": "Get Sport Participants",
+            "description": {
+              "content": "Returns a list of teams or players participating in the specified sport. Quota: 1 credit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "participants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1acd299-c1d0-4cd6-9855-eb7ad80c6a58",
+              "name": "List of participants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"full_name\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"full_name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1bc8994-f925-4a71-805a-481eda80e431",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f8fe01d-7291-4251-ac15-cf78b390b618",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "participants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "816659ea-a752-43dd-8a7b-e7665a5851b6",
+      "name": "Historical",
+      "description": {
+        "content": "Historical odds and event snapshots.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f52388d9-b7d2-419e-b488-1eca08a43015",
+          "name": "Get Historical Sport Odds",
+          "request": {
+            "name": "Get Historical Sport Odds",
+            "description": {
+              "content": "Returns a snapshot of odds at a specific historical timestamp. Available from June 6, 2020 onwards at 10-minute intervals (5-minute from Sept 2022). Quota: 10 credits per region per market.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "historical",
+                "sports",
+                ":sport",
+                "odds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 timestamp for the historical snapshot (e.g., 2023-09-16T12:00:00Z)."
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated regions for bookmakers."
+                },
+                {
+                  "disabled": false,
+                  "key": "markets",
+                  "value": "<string>",
+                  "description": "Comma-separated betting markets."
+                },
+                {
+                  "disabled": false,
+                  "key": "oddsFormat",
+                  "value": "<string>",
+                  "description": "Odds format: decimal or american."
+                },
+                {
+                  "disabled": false,
+                  "key": "bookmakers",
+                  "value": "<string>",
+                  "description": "Comma-separated bookmaker IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dbb2587-fffb-4fa1-95b9-1744dc03c9cd",
+              "name": "Historical odds snapshot with navigation timestamps.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"2010-03-24T00:10:36.510Z\",\n  \"previous_timestamp\": \"1997-06-08T04:35:22.306Z\",\n  \"next_timestamp\": \"1959-01-19T17:18:34.085Z\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"sport_key\": \"string\",\n      \"sport_title\": \"string\",\n      \"commence_time\": \"1976-03-27T01:01:16.454Z\",\n      \"home_team\": \"string\",\n      \"away_team\": \"string\",\n      \"bookmakers\": [\n        {\n          \"key\": \"string\",\n          \"title\": \"string\",\n          \"last_update\": \"1961-10-11T01:49:47.750Z\",\n          \"markets\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"title\": \"string\",\n          \"last_update\": \"1951-09-19T09:59:54.184Z\",\n          \"markets\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"sport_key\": \"string\",\n      \"sport_title\": \"string\",\n      \"commence_time\": \"1959-01-28T17:55:35.641Z\",\n      \"home_team\": \"string\",\n      \"away_team\": \"string\",\n      \"bookmakers\": [\n        {\n          \"key\": \"string\",\n          \"title\": \"string\",\n          \"last_update\": \"2021-12-14T03:18:44.761Z\",\n          \"markets\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"key\": \"string\",\n          \"title\": \"string\",\n          \"last_update\": \"1960-07-03T20:48:40.488Z\",\n          \"markets\": [\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"last_update\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"outcomes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f37d49d5-34c6-4ce7-9f99-1f021892b43d",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a72d5c-7147-43a3-8fd4-413fbd147b2d",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "bookmakers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "015b42db-98d4-415c-a78a-3d65d7304de9",
+          "name": "Get Historical Sport Events",
+          "request": {
+            "name": "Get Historical Sport Events",
+            "description": {
+              "content": "Returns event data from a specific historical timestamp. Quota: 1 credit (free if no results returned).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "historical",
+                "sports",
+                ":sport",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 timestamp for the historical query."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeFrom",
+                  "value": "<dateTime>",
+                  "description": "Filter to events commencing after this datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeTo",
+                  "value": "<dateTime>",
+                  "description": "Filter to events commencing before this datetime."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed57f4bb-6843-469a-94d3-3177e49baa6f",
+              "name": "Historical event list with navigation timestamps.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"1976-04-28T06:22:21.716Z\",\n  \"previous_timestamp\": \"2010-01-03T12:37:02.448Z\",\n  \"next_timestamp\": \"1948-10-07T14:00:42.650Z\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"sport_key\": \"string\",\n      \"sport_title\": \"string\",\n      \"commence_time\": \"2006-03-12T02:50:36.423Z\",\n      \"home_team\": \"string\",\n      \"away_team\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"sport_key\": \"string\",\n      \"sport_title\": \"string\",\n      \"commence_time\": \"1998-07-15T21:21:40.554Z\",\n      \"home_team\": \"string\",\n      \"away_team\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f756e04-aab4-45c0-9e3e-9adde1e91bb5",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b974462-3b13-455f-b342-210ce7b6ad26",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bd5a728-9ed7-4ba8-ae95-9fbc6768d1a1",
+          "name": "Get Historical Event Odds",
+          "request": {
+            "name": "Get Historical Event Odds",
+            "description": {
+              "content": "Returns odds for a specific event at a historical snapshot timestamp. Useful for backtesting, line-movement analysis, and reconstructing the full market state of a single event. Quota: 1 credit per unique market per region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "historical",
+                "sports",
+                ":sport",
+                "events",
+                ":eventId",
+                "odds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<dateTime>",
+                  "description": "(Required) ISO 8601 timestamp for the historical snapshot."
+                },
+                {
+                  "disabled": false,
+                  "key": "regions",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated regions for bookmakers."
+                },
+                {
+                  "disabled": false,
+                  "key": "markets",
+                  "value": "<string>",
+                  "description": "Comma-separated betting markets (all market types accepted)."
+                },
+                {
+                  "disabled": false,
+                  "key": "oddsFormat",
+                  "value": "<string>",
+                  "description": "Odds format: decimal or american."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "<string>",
+                  "description": "Date format: iso or unix."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) Event ID for the historical snapshot."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0cbdae2-75c3-43b1-90a3-ab5959c3520d",
+              "name": "Historical event odds snapshot with timestamp navigation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID for the historical snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": \"1999-05-06T12:23:21.506Z\",\n  \"previous_timestamp\": \"2022-02-26T22:59:16.825Z\",\n  \"next_timestamp\": \"1946-10-31T23:06:43.749Z\",\n  \"data\": {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1989-06-03T14:25:03.001Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"bookmakers\": [\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1974-08-29T03:31:55.442Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2005-02-05T14:07:32.203Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"1968-01-06T11:43:36.373Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"key\": \"string\",\n        \"title\": \"string\",\n        \"last_update\": \"1988-01-15T06:57:03.719Z\",\n        \"markets\": [\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2004-05-22T21:44:36.487Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"key\": \"string\",\n            \"last_update\": \"2018-09-07T22:03:14.420Z\",\n            \"outcomes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "665e855a-4ea0-48eb-a8e9-2a2f312ef11a",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID for the historical snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47f26a06-0028-4af7-bee4-06cce97b24cd",
+              "name": "Not found — the requested event does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID for the historical snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d20c69a8-027e-4fc0-aac2-9649c0317d7e",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "historical",
+                    "sports",
+                    ":sport",
+                    "events",
+                    ":eventId",
+                    "odds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "regions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "markets",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oddsFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) Event ID for the historical snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.the-odds-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "55d0fd30-cf8b-418e-b538-c89a854f9eac",
+    "name": "The Odds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,9 +1,10 @@
 aid: the-odds-api
 name: The Odds API
-description: The Odds API provides sports betting odds from over 40 major bookmakers worldwide. Access current and historical
-  odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Endpoints cover live scores, event listings,
-  participants, and historical odds snapshots dating back to June 2020. Quota is consumed per request based on the number
-  of regions and markets requested. All requests require an API key.
+description: >-
+  The Odds API provides sports betting odds from over 40 major bookmakers worldwide. Access current and historical odds
+  for head-to-head, spreads, totals, and outrights markets across 100+ sports. Endpoints cover live scores, event
+  listings, participants, and historical odds snapshots dating back to June 2020. Quota is consumed per request based on
+  the number of regions and markets requested. All requests require an API key.
 kind: contract
 position: Consumer
 access: 3rd-Party
@@ -21,38 +22,27 @@ specificationVersion: '0.19'
 apis:
   - aid: the-odds-api:the-odds-api
     name: The Odds API
-    description: 'Sports betting API providing current and historical odds from major bookmakers for 100+ sports. Access head-to-head,
-      spreads, totals, and outrights markets. Also provides live scores, event listings, and participant data. Quota: 1 credit
-      per region per market for current odds, 10 credits for historical odds.'
+    description: >-
+      Sports betting API providing current and historical odds from major bookmakers for 100+ sports. Access
+      head-to-head, spreads, totals, and outrights markets. Also provides live scores, event listings, and participant
+      data. Quota: 1 credit per region per market for current odds, 10 credits for historical odds.
     humanURL: https://the-odds-api.com/
     baseURL: https://api.the-odds-api.com/v4
     tags:
-    - Betting
-    - Odds
-    - Sports
-    - Scores
-    - Bookmakers
+      - Betting
+      - Odds
+      - Sports
+      - Scores
+      - Bookmakers
     properties:
-    - type: Documentation
-      url: https://the-odds-api.com/liveapi/guides/v4/
-    - type: GettingStarted
-      url: https://the-odds-api.com/liveapi/guides/v4/
-    - type: SignUp
-      url: https://the-odds-api.com/#get-access
-    - type: OpenAPI
-      url: openapi/the-odds-api-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-events.yaml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-historical.yaml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-odds.yaml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-participants.yaml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-scores.yaml
-    - type: NaftikoCapability
-      url: capabilities/the-odds-sports.yaml
+      - type: Documentation
+        url: https://the-odds-api.com/liveapi/guides/v4/
+      - type: GettingStarted
+        url: https://the-odds-api.com/liveapi/guides/v4/
+      - type: SignUp
+        url: https://the-odds-api.com/#get-access
+      - type: OpenAPI
+        url: openapi/the-odds-api-openapi.yml
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/the-odds-api
