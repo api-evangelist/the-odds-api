@@ -39,7 +39,7 @@ apis:
         url: https://the-odds-api.com/liveapi/guides/v4/
       - type: GettingStarted
         url: https://the-odds-api.com/liveapi/guides/v4/
-      - type: SignUp
+      - type: Signup
         url: https://the-odds-api.com/#get-access
       - type: OpenAPI
         url: openapi/the-odds-api-openapi.yml
@@ -50,7 +50,7 @@ common:
     url: https://the-odds-api.com/
   - type: Documentation
     url: https://the-odds-api.com/liveapi/guides/v4/
-  - type: SignUp
+  - type: Signup
     url: https://the-odds-api.com/#get-access
   - type: GitHubOrganization
     url: https://github.com/the-odds-api
