@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: the-odds-api.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 20 22:18:20 2026 GMT
+  hsts: true
+  hsts_max_age: 31556926
+- host: api.the-odds-api.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  1 23:59:59 2026 GMT
+  hsts: false
+- host: ipv6-api.the-odds-api.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec 22 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: the-odds-api.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

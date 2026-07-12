@@ -44,6 +44,10 @@ apis:
       - type: OpenAPI
         url: openapi/the-odds-api-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/the-odds-api-domain-security.yml
+  - type: Authentication
+    url: authentication/the-odds-api-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/the-odds-api
   - type: Website
