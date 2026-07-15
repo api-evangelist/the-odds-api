@@ -44,6 +44,8 @@ apis:
       - type: OpenAPI
         url: openapi/the-odds-api-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/the-odds-api-agentic-access.yml
   - type: DomainSecurity
     url: security/the-odds-api-domain-security.yml
   - type: Authentication
