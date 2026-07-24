@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: The Odds Events Sports API
+  description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
+  version: 4.0.0
+  contact:
+    url: https://the-odds-api.com/
+  termsOfService: https://the-odds-api.com/terms
+servers:
+- url: https://api.the-odds-api.com
+  description: Primary API server
+- url: https://ipv6-api.the-odds-api.com
+  description: IPv6 API server
+security:
+- apiKey: []
+tags:
+- name: Sports
+  description: Available sports and their keys.
+paths:
+  /v4/sports:
+    get:
+      operationId: getSports
+      summary: Get Available Sports
+      description: Returns a list of available sports and their keys. Free endpoint — no quota consumed. Use the all parameter to include out-of-season sports.
+      tags:
+      - Sports
+      parameters:
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      - name: all
+        in: query
+        required: false
+        description: When true, includes out-of-season sports in the response.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: List of available sports.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sport'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+    Sport:
+      type: object
+      description: A sport available for betting odds.
+      properties:
+        key:
+          type: string
+          description: Unique identifier for the sport (e.g., basketball_nba).
+        group:
+          type: string
+          description: Sport group/category (e.g., Basketball, American Football).
+        title:
+          type: string
+          description: Human-readable title (e.g., NBA).
+        description:
+          type: string
+          description: Description of the sport or competition.
+        active:
+          type: boolean
+          description: Whether the sport currently has events with odds.
+        has_outrights:
+          type: boolean
+          description: Whether outrights/futures markets are available.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: apiKey
+      in: query

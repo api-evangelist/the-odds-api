@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: The Odds Events Participants API
+  description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
+  version: 4.0.0
+  contact:
+    url: https://the-odds-api.com/
+  termsOfService: https://the-odds-api.com/terms
+servers:
+- url: https://api.the-odds-api.com
+  description: Primary API server
+- url: https://ipv6-api.the-odds-api.com
+  description: IPv6 API server
+security:
+- apiKey: []
+tags:
+- name: Participants
+  description: Teams and players in a sport.
+paths:
+  /v4/sports/{sport}/participants:
+    get:
+      operationId: getSportParticipants
+      summary: Get Sport Participants
+      description: 'Returns a list of teams or players participating in the specified sport. Quota: 1 credit.'
+      tags:
+      - Participants
+      parameters:
+      - name: sport
+        in: path
+        required: true
+        description: Sport key from /v4/sports.
+        schema:
+          type: string
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of participants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Participant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+    Participant:
+      type: object
+      description: A team or player in a sport.
+      properties:
+        id:
+          type: string
+          description: Participant identifier.
+        full_name:
+          type: string
+          description: Full name of the team or player.
+  responses:
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: apiKey
+      in: query

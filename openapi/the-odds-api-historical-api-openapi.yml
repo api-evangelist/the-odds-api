@@ -1,0 +1,418 @@
+openapi: 3.0.3
+info:
+  title: The Odds Events Historical API
+  description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
+  version: 4.0.0
+  contact:
+    url: https://the-odds-api.com/
+  termsOfService: https://the-odds-api.com/terms
+servers:
+- url: https://api.the-odds-api.com
+  description: Primary API server
+- url: https://ipv6-api.the-odds-api.com
+  description: IPv6 API server
+security:
+- apiKey: []
+tags:
+- name: Historical
+  description: Historical odds and event snapshots.
+paths:
+  /v4/historical/sports/{sport}/odds:
+    get:
+      operationId: getHistoricalOdds
+      summary: Get Historical Sport Odds
+      description: 'Returns a snapshot of odds at a specific historical timestamp. Available from June 6, 2020 onwards at 10-minute intervals (5-minute from Sept 2022). Quota: 10 credits per region per market.'
+      tags:
+      - Historical
+      parameters:
+      - name: sport
+        in: path
+        required: true
+        description: Sport key from /v4/sports.
+        schema:
+          type: string
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      - name: date
+        in: query
+        required: true
+        description: ISO 8601 timestamp for the historical snapshot (e.g., 2023-09-16T12:00:00Z).
+        schema:
+          type: string
+          format: date-time
+      - name: regions
+        in: query
+        required: true
+        description: Comma-separated regions for bookmakers.
+        schema:
+          type: string
+      - name: markets
+        in: query
+        required: false
+        description: Comma-separated betting markets.
+        schema:
+          type: string
+      - name: oddsFormat
+        in: query
+        required: false
+        description: 'Odds format: decimal or american.'
+        schema:
+          type: string
+          enum:
+          - decimal
+          - american
+      - name: bookmakers
+        in: query
+        required: false
+        description: Comma-separated bookmaker IDs.
+        schema:
+          type: string
+      - name: eventIds
+        in: query
+        required: false
+        description: Comma-separated event IDs to filter.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Historical odds snapshot with navigation timestamps.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalOddsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v4/historical/sports/{sport}/events:
+    get:
+      operationId: getHistoricalEvents
+      summary: Get Historical Sport Events
+      description: 'Returns event data from a specific historical timestamp. Quota: 1 credit (free if no results returned).'
+      tags:
+      - Historical
+      parameters:
+      - name: sport
+        in: path
+        required: true
+        description: Sport key from /v4/sports.
+        schema:
+          type: string
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      - name: date
+        in: query
+        required: true
+        description: ISO 8601 timestamp for the historical query.
+        schema:
+          type: string
+          format: date-time
+      - name: eventIds
+        in: query
+        required: false
+        description: Comma-separated event IDs to filter.
+        schema:
+          type: string
+      - name: commenceTimeFrom
+        in: query
+        required: false
+        description: Filter to events commencing after this datetime.
+        schema:
+          type: string
+          format: date-time
+      - name: commenceTimeTo
+        in: query
+        required: false
+        description: Filter to events commencing before this datetime.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Historical event list with navigation timestamps.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v4/historical/sports/{sport}/events/{eventId}/odds:
+    get:
+      operationId: getHistoricalEventOdds
+      summary: Get Historical Event Odds
+      description: 'Returns odds for a specific event at a historical snapshot timestamp. Useful for backtesting, line-movement analysis, and reconstructing the full market state of a single event. Quota: 1 credit per unique market per region.'
+      tags:
+      - Historical
+      parameters:
+      - name: sport
+        in: path
+        required: true
+        description: Sport key from /v4/sports.
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        required: true
+        description: Event ID for the historical snapshot.
+        schema:
+          type: string
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      - name: date
+        in: query
+        required: true
+        description: ISO 8601 timestamp for the historical snapshot.
+        schema:
+          type: string
+          format: date-time
+      - name: regions
+        in: query
+        required: true
+        description: Comma-separated regions for bookmakers.
+        schema:
+          type: string
+      - name: markets
+        in: query
+        required: false
+        description: Comma-separated betting markets (all market types accepted).
+        schema:
+          type: string
+      - name: oddsFormat
+        in: query
+        required: false
+        description: 'Odds format: decimal or american.'
+        schema:
+          type: string
+          enum:
+          - decimal
+          - american
+      - name: dateFormat
+        in: query
+        required: false
+        description: 'Date format: iso or unix.'
+        schema:
+          type: string
+          enum:
+          - iso
+          - unix
+      responses:
+        '200':
+          description: Historical event odds snapshot with timestamp navigation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalEventOddsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found — the requested event does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    HistoricalOddsResponse:
+      type: object
+      description: Historical odds snapshot with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Actual timestamp of this snapshot.
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the previous available snapshot.
+        next_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the next available snapshot.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          description: Events with odds as of the snapshot timestamp.
+    Market:
+      type: object
+      description: A betting market with outcomes from a bookmaker.
+      properties:
+        key:
+          type: string
+          description: Market key (e.g., h2h, spreads, totals, outrights).
+        last_update:
+          type: string
+          format: date-time
+          description: When the market was last updated.
+        outcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+          description: Available betting outcomes.
+    HistoricalEventOddsResponse:
+      type: object
+      description: Historical odds snapshot for a single event with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Actual timestamp of this snapshot.
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the previous available snapshot.
+        next_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the next available snapshot.
+        data:
+          $ref: '#/components/schemas/Event'
+    Event:
+      type: object
+      description: A sporting event with odds from bookmakers.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        sport_key:
+          type: string
+          description: Sport key for the event.
+        sport_title:
+          type: string
+          description: Human-readable sport title.
+        commence_time:
+          type: string
+          format: date-time
+          description: Scheduled start time of the event.
+        home_team:
+          type: string
+          description: Home team name.
+        away_team:
+          type: string
+          description: Away team name.
+        bookmakers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bookmaker'
+          description: List of bookmakers providing odds.
+    HistoricalEventsResponse:
+      type: object
+      description: Historical events with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Snapshot timestamp.
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: Previous available snapshot timestamp.
+        next_timestamp:
+          type: string
+          format: date-time
+          description: Next available snapshot timestamp.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventMeta'
+          description: Events as of the snapshot timestamp.
+    Outcome:
+      type: object
+      description: A betting outcome (team/player) with price.
+      properties:
+        name:
+          type: string
+          description: Name of the team or player.
+        description:
+          type: string
+          description: Additional description (e.g., Over, Under for totals).
+        price:
+          type: number
+          description: Odds price in the requested format.
+        point:
+          type: number
+          description: Point spread or total line value (for spreads and totals markets).
+    EventMeta:
+      type: object
+      description: Event metadata without odds.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        sport_key:
+          type: string
+          description: Sport key.
+        sport_title:
+          type: string
+          description: Sport title.
+        commence_time:
+          type: string
+          format: date-time
+          description: Event start time.
+        home_team:
+          type: string
+          description: Home team name.
+        away_team:
+          type: string
+          description: Away team name.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+    Bookmaker:
+      type: object
+      description: A bookmaker providing odds for an event.
+      properties:
+        key:
+          type: string
+          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
+        title:
+          type: string
+          description: Human-readable bookmaker name.
+        last_update:
+          type: string
+          format: date-time
+          description: When this bookmaker's odds were last updated.
+        markets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Market'
+          description: Betting markets offered by this bookmaker.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: apiKey
+      in: query

@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: The Odds Events API
+  description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
+  version: 4.0.0
+  contact:
+    url: https://the-odds-api.com/
+  termsOfService: https://the-odds-api.com/terms
+servers:
+- url: https://api.the-odds-api.com
+  description: Primary API server
+- url: https://ipv6-api.the-odds-api.com
+  description: IPv6 API server
+security:
+- apiKey: []
+tags:
+- name: Events
+  description: Event listings without odds.
+paths:
+  /v4/sports/{sport}/events:
+    get:
+      operationId: getSportEvents
+      summary: Get Sport Events
+      description: Returns upcoming event IDs and metadata without odds data. Free endpoint — no quota consumed.
+      tags:
+      - Events
+      parameters:
+      - name: sport
+        in: path
+        required: true
+        description: Sport key from /v4/sports.
+        schema:
+          type: string
+      - name: apiKey
+        in: query
+        required: true
+        description: Your API key.
+        schema:
+          type: string
+      - name: dateFormat
+        in: query
+        required: false
+        description: 'Date format. Values: iso (default), unix.'
+        schema:
+          type: string
+          enum:
+          - iso
+          - unix
+      - name: eventIds
+        in: query
+        required: false
+        description: Comma-separated event IDs to filter.
+        schema:
+          type: string
+      - name: commenceTimeFrom
+        in: query
+        required: false
+        description: Filter events commencing after this ISO 8601 datetime.
+        schema:
+          type: string
+          format: date-time
+      - name: commenceTimeTo
+        in: query
+        required: false
+        description: Filter events commencing before this ISO 8601 datetime.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: List of upcoming events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventMeta'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+    EventMeta:
+      type: object
+      description: Event metadata without odds.
+      properties:
+        id:
+          type: string
+          description: Unique event identifier.
+        sport_key:
+          type: string
+          description: Sport key.
+        sport_title:
+          type: string
+          description: Sport title.
+        commence_time:
+          type: string
+          format: date-time
+          description: Event start time.
+        home_team:
+          type: string
+          description: Home team name.
+        away_team:
+          type: string
+          description: Away team name.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: apiKey
+      in: query
