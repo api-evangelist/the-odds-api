@@ -1,0 +1,24 @@
+{
+  "provider": "the-odds-api",
+  "sources": [
+    "the-odds-api-events-api-openapi.yml",
+    "the-odds-api-historical-api-openapi.yml",
+    "the-odds-api-odds-api-openapi.yml",
+    "the-odds-api-participants-api-openapi.yml",
+    "the-odds-api-scores-api-openapi.yml",
+    "the-odds-api-sports-api-openapi.yml"
+  ],
+  "outputs": [
+    "the-odds-api-events-api-openapi.yml",
+    "the-odds-api-historical-api-openapi.yml",
+    "the-odds-api-odds-api-openapi.yml",
+    "the-odds-api-participants-api-openapi.yml",
+    "the-odds-api-scores-api-openapi.yml",
+    "the-odds-api-sports-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
