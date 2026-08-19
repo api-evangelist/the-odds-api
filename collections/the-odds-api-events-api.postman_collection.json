@@ -1,0 +1,339 @@
+{
+  "item": [
+    {
+      "id": "b4f30e5f-3034-4561-b25f-e004fa2b84cb",
+      "name": "Events",
+      "description": {
+        "content": "Event listings without odds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "108b9bc6-b99e-49de-9096-5d176d99e83e",
+          "name": "Get Sport Events",
+          "request": {
+            "name": "Get Sport Events",
+            "description": {
+              "content": "Returns upcoming event IDs and metadata without odds data. Free endpoint — no quota consumed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "<string>",
+                  "description": "Date format. Values: iso (default), unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeFrom",
+                  "value": "<dateTime>",
+                  "description": "Filter events commencing after this ISO 8601 datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "commenceTimeTo",
+                  "value": "<dateTime>",
+                  "description": "Filter events commencing before this ISO 8601 datetime."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6acf1338-f741-4d15-bfd9-095f07970013",
+              "name": "List of upcoming events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"2013-11-16T17:45:53.445Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1978-11-06T21:56:13.315Z\",\n    \"home_team\": \"string\",\n    \"away_team\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d59df320-f25e-4faf-b8a2-5279b6823d67",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63e3e228-72fd-421e-a64e-957b65bfb31b",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commenceTimeFrom",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "commenceTimeTo",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.the-odds-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95711544-8161-495b-ad6d-9ecc297ff955",
+    "name": "The Odds Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.",
+      "type": "text/plain"
+    }
+  }
+}

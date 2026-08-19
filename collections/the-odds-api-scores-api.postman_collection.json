@@ -1,0 +1,321 @@
+{
+  "item": [
+    {
+      "id": "4df7646c-a1cf-4ff4-85f2-5ac9c34f8b39",
+      "name": "Scores",
+      "description": {
+        "content": "Live and recent game scores.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53dc9a84-edb9-4fce-9a74-9d664a55d406",
+          "name": "Get Sport Scores",
+          "request": {
+            "name": "Get Sport Scores",
+            "description": {
+              "content": "Returns live and recent scores for a given sport. Quota: 1 credit for live scores only, 2 credits when using the daysFrom parameter. Live scores refresh approximately every 30 seconds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "sports",
+                ":sport",
+                "scores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Your API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "daysFrom",
+                  "value": "<integer>",
+                  "description": "Include completed games from this many days ago (1-3). Adding this increases cost to 2 credits."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFormat",
+                  "value": "iso",
+                  "description": "Date format. Values: iso (default), unix."
+                },
+                {
+                  "disabled": false,
+                  "key": "eventIds",
+                  "value": "<string>",
+                  "description": "Comma-separated event IDs to filter results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sport",
+                  "description": "(Required) Sport key from /v4/sports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92303175-96c7-48a5-8b54-ca90883087d6",
+              "name": "List of events with score information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1949-09-02T20:39:11.601Z\",\n    \"completed\": true,\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"scores\": [\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      }\n    ],\n    \"last_update\": \"1997-02-10T20:00:05.706Z\"\n  },\n  {\n    \"id\": \"string\",\n    \"sport_key\": \"string\",\n    \"sport_title\": \"string\",\n    \"commence_time\": \"1961-07-26T11:03:00.599Z\",\n    \"completed\": true,\n    \"home_team\": \"string\",\n    \"away_team\": \"string\",\n    \"scores\": [\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"score\": \"string\"\n      }\n    ],\n    \"last_update\": \"1953-09-14T13:02:43.820Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c789f373-938d-43be-af8c-c1c76b6ef7d5",
+              "name": "Unauthorized — invalid or missing API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dafd64a9-f99c-4b4d-ad58-efaed6157ffb",
+              "name": "Too many requests — quota exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "sports",
+                    ":sport",
+                    "scores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "daysFrom",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dateFormat",
+                      "value": "iso"
+                    },
+                    {
+                      "key": "eventIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sport",
+                      "description": "(Required) Sport key from /v4/sports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.the-odds-api.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "apiKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "80ab9df2-7a1a-46fd-833b-8ba5bd0badb8",
+    "name": "The Odds Events Scores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.",
+      "type": "text/plain"
+    }
+  }
+}

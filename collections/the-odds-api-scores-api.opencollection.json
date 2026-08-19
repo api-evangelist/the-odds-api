@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "The Odds Events Scores API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Scores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Sport Scores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.the-odds-api.com/v4/sports/:sport/scores",
+            "params": [
+              {
+                "name": "sport",
+                "value": "",
+                "type": "path",
+                "description": "Sport key from /v4/sports."
+              },
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Your API key."
+              },
+              {
+                "name": "daysFrom",
+                "value": "",
+                "type": "query",
+                "description": "Include completed games from this many days ago (1-3). Adding this increases cost to 2 credits."
+              },
+              {
+                "name": "dateFormat",
+                "value": "",
+                "type": "query",
+                "description": "Date format. Values: iso (default), unix."
+              },
+              {
+                "name": "eventIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated event IDs to filter results."
+              }
+            ]
+          },
+          "docs": "Returns live and recent scores for a given sport. Quota: 1 credit for live scores only, 2 credits when using the daysFrom parameter. Live scores refresh approximately every 30 seconds."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

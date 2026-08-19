@@ -1,0 +1,221 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "The Events Odds API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Odds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Sport Odds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.the-odds-api.com/v4/sports/:sport/odds",
+            "params": [
+              {
+                "name": "sport",
+                "value": "",
+                "type": "path",
+                "description": "Sport key from /v4/sports (e.g., basketball_nba, americanfootball_nfl) or 'upcoming' for cross-sport upcoming events."
+              },
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Your API key."
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated regions for bookmakers. Values: us, us2, uk, au, eu. Quota: 1 credit per region per market."
+              },
+              {
+                "name": "markets",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated betting markets. Values: h2h, spreads, totals, outrights. Defaults to h2h."
+              },
+              {
+                "name": "oddsFormat",
+                "value": "",
+                "type": "query",
+                "description": "Odds format. Values: decimal (default), american."
+              },
+              {
+                "name": "dateFormat",
+                "value": "",
+                "type": "query",
+                "description": "Date format. Values: iso (default), unix."
+              },
+              {
+                "name": "bookmakers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated bookmaker IDs to filter results. Cannot be used with regions parameter."
+              },
+              {
+                "name": "eventIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated event IDs to filter results."
+              },
+              {
+                "name": "commenceTimeFrom",
+                "value": "",
+                "type": "query",
+                "description": "Filter to events commencing after this ISO 8601 datetime."
+              },
+              {
+                "name": "commenceTimeTo",
+                "value": "",
+                "type": "query",
+                "description": "Filter to events commencing before this ISO 8601 datetime."
+              },
+              {
+                "name": "includeLinks",
+                "value": "",
+                "type": "query",
+                "description": "Include bookmaker deep-links to the event."
+              },
+              {
+                "name": "includeBetLimits",
+                "value": "",
+                "type": "query",
+                "description": "Include maximum bet limit information where available."
+              }
+            ]
+          },
+          "docs": "Returns current odds for a given sport from multiple bookmakers. Quota cost: 1 credit per region per market. Use sport key from /v4/sports or 'upcoming' for cross-sport upcoming events."
+        },
+        {
+          "info": {
+            "name": "Get Event Odds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.the-odds-api.com/v4/sports/:sport/events/:eventId/odds",
+            "params": [
+              {
+                "name": "sport",
+                "value": "",
+                "type": "path",
+                "description": "Sport key from /v4/sports."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Event ID from /v4/sports/{sport}/events."
+              },
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Your API key."
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated regions for bookmakers."
+              },
+              {
+                "name": "markets",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated betting markets."
+              },
+              {
+                "name": "oddsFormat",
+                "value": "",
+                "type": "query",
+                "description": "Odds format: decimal or american."
+              },
+              {
+                "name": "dateFormat",
+                "value": "",
+                "type": "query",
+                "description": "Date format: iso or unix."
+              },
+              {
+                "name": "bookmakers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated bookmaker IDs to include."
+              }
+            ]
+          },
+          "docs": "Returns all available markets for a specific event. Quota: 1 credit per unique market returned per region. Provides comprehensive coverage for a single event including player props and alternate lines."
+        },
+        {
+          "info": {
+            "name": "Get Event Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.the-odds-api.com/v4/sports/:sport/events/:eventId/markets",
+            "params": [
+              {
+                "name": "sport",
+                "value": "",
+                "type": "path",
+                "description": "Sport key from /v4/sports."
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "Event ID from /v4/sports/{sport}/events."
+              },
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Your API key."
+              },
+              {
+                "name": "regions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated regions for bookmakers."
+              },
+              {
+                "name": "bookmakers",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated bookmaker IDs to include."
+              },
+              {
+                "name": "dateFormat",
+                "value": "",
+                "type": "query",
+                "description": "Date format: iso or unix."
+              }
+            ]
+          },
+          "docs": "Returns the list of betting markets available for a specific event, grouped by bookmaker. Useful for discovering which player props and alternate lines are offered before requesting odds. Quota: 1 credit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

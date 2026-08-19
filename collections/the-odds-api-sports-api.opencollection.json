@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "The Odds Events Sports API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "apiKey",
+      "value": "{{apiKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Available Sports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.the-odds-api.com/v4/sports",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "",
+                "type": "query",
+                "description": "Your API key."
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "When true, includes out-of-season sports in the response."
+              }
+            ]
+          },
+          "docs": "Returns a list of available sports and their keys. Free endpoint — no quota consumed. Use the all parameter to include out-of-season sports."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
