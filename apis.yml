@@ -39,6 +39,8 @@ apis:
   humanURL: https://the-odds-api.com/
   baseURL: https://api.the-odds-api.com/v4
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
