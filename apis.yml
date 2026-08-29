@@ -6,6 +6,18 @@ description: >-
   listings, participants, and historical odds snapshots dating back to June 2020. Quota is consumed per request based on
   the number of regions and markets requested. All requests require an API key.
 kind: contract
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
