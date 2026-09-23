@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: The Odds Events Scores API
+  title: Odds Scores API
   description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
   version: 4.0.0
   contact:
@@ -75,30 +75,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Too many requests — quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Score:
-      type: object
-      description: Score for one team in a game.
-      properties:
-        name:
-          type: string
-          description: Team name.
-        score:
-          type: string
-          description: Current score.
     ScoreEvent:
       type: object
       description: An event with live or recent score information.
@@ -126,22 +103,47 @@ components:
           type: string
           description: Away team name.
         scores:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/Score'
           description: Current scores for each team. Null if game hasn't started.
         last_update:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: When the score was last updated.
+    Score:
+      type: object
+      description: Score for one team in a game.
+      properties:
+        name:
+          type: string
+          description: Team name.
+        score:
+          type: string
+          description: Current score.
     Error:
       type: object
       properties:
         message:
           type: string
           description: Error description.
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

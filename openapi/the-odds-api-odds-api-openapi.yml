@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: The Events Odds API
+  title: The Odds API
   description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
   version: 4.0.0
   contact:
@@ -272,48 +272,23 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Too many requests — quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found — the requested event does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: Unprocessable entity — invalid parameter values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Market:
+    Outcome:
       type: object
-      description: A betting market with outcomes from a bookmaker.
+      description: A betting outcome (team/player) with price.
       properties:
-        key:
+        name:
           type: string
-          description: Market key (e.g., h2h, spreads, totals, outrights).
-        last_update:
+          description: Name of the team or player.
+        description:
           type: string
-          format: date-time
-          description: When the market was last updated.
-        outcomes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Outcome'
-          description: Available betting outcomes.
+          description: Additional description (e.g., Over, Under for totals).
+        price:
+          type: number
+          description: Odds price in the requested format.
+        point:
+          type: number
+          description: Point spread or total line value (for spreads and totals markets).
     Event:
       type: object
       description: A sporting event with odds from bookmakers.
@@ -342,22 +317,6 @@ components:
           items:
             $ref: '#/components/schemas/Bookmaker'
           description: List of bookmakers providing odds.
-    Outcome:
-      type: object
-      description: A betting outcome (team/player) with price.
-      properties:
-        name:
-          type: string
-          description: Name of the team or player.
-        description:
-          type: string
-          description: Additional description (e.g., Over, Under for totals).
-        price:
-          type: number
-          description: Odds price in the requested format.
-        point:
-          type: number
-          description: Point spread or total line value (for spreads and totals markets).
     Error:
       type: object
       properties:
@@ -383,6 +342,47 @@ components:
           items:
             $ref: '#/components/schemas/Market'
           description: Betting markets offered by this bookmaker.
+    Market:
+      type: object
+      description: A betting market with outcomes from a bookmaker.
+      properties:
+        key:
+          type: string
+          description: Market key (e.g., h2h, spreads, totals, outrights).
+        last_update:
+          type: string
+          format: date-time
+          description: When the market was last updated.
+        outcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+          description: Available betting outcomes.
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Unprocessable entity — invalid parameter values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found — the requested event does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

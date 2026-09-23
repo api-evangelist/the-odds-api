@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: The Odds Events Sports API
+  title: Odds Sports API
   description: The Odds API provides sports betting odds from major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Also provides live scores and event listings. Requires an API key for all requests. Quota is consumed per request based on number of regions and markets requested.
   version: 4.0.0
   contact:
@@ -52,26 +52,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests — quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
     Sport:
       type: object
       description: A sport available for betting odds.
@@ -94,6 +75,25 @@ components:
         has_outrights:
           type: boolean
           description: Whether outrights/futures markets are available.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey
