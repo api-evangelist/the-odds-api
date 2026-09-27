@@ -224,27 +224,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    HistoricalOddsResponse:
-      type: object
-      description: Historical odds snapshot with timestamp navigation.
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          description: Actual timestamp of this snapshot.
-        previous_timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the previous available snapshot.
-        next_timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the next available snapshot.
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-          description: Events with odds as of the snapshot timestamp.
     Outcome:
       type: object
       description: A betting outcome (team/player) with price.
@@ -289,12 +268,52 @@ components:
           items:
             $ref: '#/components/schemas/Bookmaker'
           description: List of bookmakers providing odds.
+    Bookmaker:
+      type: object
+      description: A bookmaker providing odds for an event.
+      properties:
+        key:
+          type: string
+          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
+        title:
+          type: string
+          description: Human-readable bookmaker name.
+        last_update:
+          type: string
+          format: date-time
+          description: When this bookmaker's odds were last updated.
+        markets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Market'
+          description: Betting markets offered by this bookmaker.
     Error:
       type: object
       properties:
         message:
           type: string
           description: Error description.
+    HistoricalOddsResponse:
+      type: object
+      description: Historical odds snapshot with timestamp navigation.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Actual timestamp of this snapshot.
+        previous_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the previous available snapshot.
+        next_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the next available snapshot.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          description: Events with odds as of the snapshot timestamp.
     HistoricalEventsResponse:
       type: object
       description: Historical events with timestamp navigation.
@@ -339,25 +358,22 @@ components:
         away_team:
           type: string
           description: Away team name.
-    Bookmaker:
+    Market:
       type: object
-      description: A bookmaker providing odds for an event.
+      description: A betting market with outcomes from a bookmaker.
       properties:
         key:
           type: string
-          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
-        title:
-          type: string
-          description: Human-readable bookmaker name.
+          description: Market key (e.g., h2h, spreads, totals, outrights).
         last_update:
           type: string
           format: date-time
-          description: When this bookmaker's odds were last updated.
-        markets:
+          description: When the market was last updated.
+        outcomes:
           type: array
           items:
-            $ref: '#/components/schemas/Market'
-          description: Betting markets offered by this bookmaker.
+            $ref: '#/components/schemas/Outcome'
+          description: Available betting outcomes.
     HistoricalEventOddsResponse:
       type: object
       description: Historical odds snapshot for a single event with timestamp navigation.
@@ -376,22 +392,6 @@ components:
           description: Timestamp of the next available snapshot.
         data:
           $ref: '#/components/schemas/Event'
-    Market:
-      type: object
-      description: A betting market with outcomes from a bookmaker.
-      properties:
-        key:
-          type: string
-          description: Market key (e.g., h2h, spreads, totals, outrights).
-        last_update:
-          type: string
-          format: date-time
-          description: When the market was last updated.
-        outcomes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Outcome'
-          description: Available betting outcomes.
   responses:
     Unauthorized:
       description: Unauthorized — invalid or missing API key.

@@ -317,12 +317,6 @@ components:
           items:
             $ref: '#/components/schemas/Bookmaker'
           description: List of bookmakers providing odds.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
     Bookmaker:
       type: object
       description: A bookmaker providing odds for an event.
@@ -342,6 +336,12 @@ components:
           items:
             $ref: '#/components/schemas/Market'
           description: Betting markets offered by this bookmaker.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
     Market:
       type: object
       description: A betting market with outcomes from a bookmaker.

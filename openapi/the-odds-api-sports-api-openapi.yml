@@ -82,14 +82,14 @@ components:
           type: string
           description: Error description.
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
+    RateLimited:
+      description: Too many requests — quota exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests — quota exceeded.
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
       content:
         application/json:
           schema:

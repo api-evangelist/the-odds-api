@@ -115,6 +115,12 @@ components:
           - 'null'
           format: date-time
           description: When the score was last updated.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
     Score:
       type: object
       description: Score for one team in a game.
@@ -125,12 +131,6 @@ components:
         score:
           type: string
           description: Current score.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
   responses:
     Unauthorized:
       description: Unauthorized — invalid or missing API key.
