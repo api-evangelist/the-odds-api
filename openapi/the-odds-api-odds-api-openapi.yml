@@ -273,22 +273,25 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Outcome:
+    Bookmaker:
       type: object
-      description: A betting outcome (team/player) with price.
+      description: A bookmaker providing odds for an event.
       properties:
-        name:
+        key:
           type: string
-          description: Name of the team or player.
-        description:
+          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
+        title:
           type: string
-          description: Additional description (e.g., Over, Under for totals).
-        price:
-          type: number
-          description: Odds price in the requested format.
-        point:
-          type: number
-          description: Point spread or total line value (for spreads and totals markets).
+          description: Human-readable bookmaker name.
+        last_update:
+          type: string
+          format: date-time
+          description: When this bookmaker's odds were last updated.
+        markets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Market'
+          description: Betting markets offered by this bookmaker.
     Event:
       type: object
       description: A sporting event with odds from bookmakers.
@@ -317,25 +320,6 @@ components:
           items:
             $ref: '#/components/schemas/Bookmaker'
           description: List of bookmakers providing odds.
-    Bookmaker:
-      type: object
-      description: A bookmaker providing odds for an event.
-      properties:
-        key:
-          type: string
-          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
-        title:
-          type: string
-          description: Human-readable bookmaker name.
-        last_update:
-          type: string
-          format: date-time
-          description: When this bookmaker's odds were last updated.
-        markets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Market'
-          description: Betting markets offered by this bookmaker.
     Error:
       type: object
       properties:
@@ -358,13 +342,23 @@ components:
           items:
             $ref: '#/components/schemas/Outcome'
           description: Available betting outcomes.
+    Outcome:
+      type: object
+      description: A betting outcome (team/player) with price.
+      properties:
+        name:
+          type: string
+          description: Name of the team or player.
+        description:
+          type: string
+          description: Additional description (e.g., Over, Under for totals).
+        price:
+          type: number
+          description: Odds price in the requested format.
+        point:
+          type: number
+          description: Point spread or total line value (for spreads and totals markets).
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     RateLimited:
       description: Too many requests — quota exceeded.
       content:
@@ -379,6 +373,12 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Not found — the requested event does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
       content:
         application/json:
           schema:
