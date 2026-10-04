@@ -81,6 +81,12 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
     EventMeta:
       type: object
       description: Event metadata without odds.
@@ -104,12 +110,6 @@ components:
         away_team:
           type: string
           description: Away team name.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
   responses:
     RateLimited:
       description: Too many requests — quota exceeded.

@@ -273,25 +273,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    Bookmaker:
-      type: object
-      description: A bookmaker providing odds for an event.
-      properties:
-        key:
-          type: string
-          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
-        title:
-          type: string
-          description: Human-readable bookmaker name.
-        last_update:
-          type: string
-          format: date-time
-          description: When this bookmaker's odds were last updated.
-        markets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Market'
-          description: Betting markets offered by this bookmaker.
     Event:
       type: object
       description: A sporting event with odds from bookmakers.
@@ -320,28 +301,6 @@ components:
           items:
             $ref: '#/components/schemas/Bookmaker'
           description: List of bookmakers providing odds.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
-    Market:
-      type: object
-      description: A betting market with outcomes from a bookmaker.
-      properties:
-        key:
-          type: string
-          description: Market key (e.g., h2h, spreads, totals, outrights).
-        last_update:
-          type: string
-          format: date-time
-          description: When the market was last updated.
-        outcomes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Outcome'
-          description: Available betting outcomes.
     Outcome:
       type: object
       description: A betting outcome (team/player) with price.
@@ -358,27 +317,68 @@ components:
         point:
           type: number
           description: Point spread or total line value (for spreads and totals markets).
+    Bookmaker:
+      type: object
+      description: A bookmaker providing odds for an event.
+      properties:
+        key:
+          type: string
+          description: Unique bookmaker identifier (e.g., draftkings, fanduel, betmgm).
+        title:
+          type: string
+          description: Human-readable bookmaker name.
+        last_update:
+          type: string
+          format: date-time
+          description: When this bookmaker's odds were last updated.
+        markets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Market'
+          description: Betting markets offered by this bookmaker.
+    Market:
+      type: object
+      description: A betting market with outcomes from a bookmaker.
+      properties:
+        key:
+          type: string
+          description: Market key (e.g., h2h, spreads, totals, outrights).
+        last_update:
+          type: string
+          format: date-time
+          description: When the market was last updated.
+        outcomes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Outcome'
+          description: Available betting outcomes.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
   responses:
-    RateLimited:
-      description: Too many requests — quota exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     UnprocessableEntity:
       description: Unprocessable entity — invalid parameter values.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found — the requested event does not exist.
+    Unauthorized:
+      description: Unauthorized — invalid or missing API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized — invalid or missing API key.
+    RateLimited:
+      description: Too many requests — quota exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found — the requested event does not exist.
       content:
         application/json:
           schema:

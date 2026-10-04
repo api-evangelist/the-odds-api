@@ -51,6 +51,23 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error description.
+    Participant:
+      type: object
+      description: A team or player in a sport.
+      properties:
+        id:
+          type: string
+          description: Participant identifier.
+        full_name:
+          type: string
+          description: Full name of the team or player.
   responses:
     RateLimited:
       description: Too many requests — quota exceeded.
@@ -64,23 +81,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  schemas:
-    Participant:
-      type: object
-      description: A team or player in a sport.
-      properties:
-        id:
-          type: string
-          description: Participant identifier.
-        full_name:
-          type: string
-          description: Full name of the team or player.
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Error description.
   securitySchemes:
     apiKey:
       type: apiKey
