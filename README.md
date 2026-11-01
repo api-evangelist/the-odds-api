@@ -1,4 +1,4 @@
-# The Odds API (the-odds-api)
+# The Odds API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,69 +66,163 @@
 
 The Odds API provides sports betting odds from over 40 major bookmakers worldwide. Access current and historical odds for head-to-head, spreads, totals, and outrights markets across 100+ sports. Endpoints cover live scores, event listings, participants, and historical odds snapshots dating back to June 2020. Quota is consumed per request based on the number of regions and markets requested. All requests require an API key.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/the-odds-api/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/the-odds-api/refs/heads/main/apis.yml)
+**Areas:** Betting · Odds · Sports · Scores · Historical Data
 
-## Scope
+## The Odds API on APIs.io
 
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for The Odds API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/the-odds-api/](https://apis.io/providers/the-odds-api/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Betting
-- Odds
-- Sports
-- Scores
-- Historical Data
+- [The Odds API Events API](https://apis.io/apis/the-odds-api/the-odds-api-events-api/) — Event listings without odds.
+- [The Odds API Historical API](https://apis.io/apis/the-odds-api/the-odds-api-historical-api/) — Historical odds and event snapshots.
+- [The Odds API Odds API](https://apis.io/apis/the-odds-api/the-odds-api-odds-api/) — Current odds from bookmakers.
+- [The Odds API Participants API](https://apis.io/apis/the-odds-api/the-odds-api-participants-api/) — Teams and players in a sport.
+- [The Odds API Scores API](https://apis.io/apis/the-odds-api/the-odds-api-scores-api/) — Live and recent game scores.
+- [The Odds API Sports API](https://apis.io/apis/the-odds-api/the-odds-api-sports-api/) — Available sports and their keys.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-08
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### The Odds API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Sports betting API providing current and historical odds from major bookmakers for 100+ sports. Access head-to-head, spreads, totals, and outrights markets. Also provides live scores, event listings, and participant data. Quota: 1 credit per region per market for current odds, 10 credits for historical odds.
+- [The Odds Api Agentic Access](https://apis.io/agentic-access/the-odds-api/the-odds-api-agentic-access/)
 
-- **Human URL:** [https://the-odds-api.com/](https://the-odds-api.com/)
-- **Base URL:** `https://api.the-odds-api.com/v4`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Betting
-- Odds
-- Sports
-- Scores
-- Bookmakers
+- [The Odds API Event](https://apis.io/schemas/the-odds-api/the-odds-api-event/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://the-odds-api.com/liveapi/guides/v4/)
-- [Getting Started](https://the-odds-api.com/liveapi/guides/v4/)
-- [Sign Up](https://the-odds-api.com/#get-access)
-- [OpenAPI](openapi/the-odds-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/the-odds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/the-odds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [The Odds Api Event Structure](https://apis.io/json-structure/the-odds-api/the-odds-api-event-structure/)
 
-- [LinkedIn](https://www.linkedin.com/company/the-odds-api)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [The Odds Api Context](https://apis.io/jsonld/the-odds-api/the-odds-api-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [The Odds Api Vocabulary](https://apis.io/vocabularies/the-odds-api/the-odds-api-vocabulary/)
+
+#### Examples (1)
+
+Example requests and responses.
+
+- [The Odds Api Get Odds Example](https://apis.io/examples/the-odds-api/the-odds-api-get-odds-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [The Odds API](https://apis.io/collections/the-odds-api/open-the-odds-api/)
+- [The Odds Events API](https://apis.io/collections/the-odds-api/open-the-odds-api-events-api/)
+- [The Odds Events Historical API](https://apis.io/collections/the-odds-api/open-the-odds-api-historical-api/)
+- [The Events Odds API](https://apis.io/collections/the-odds-api/open-the-odds-api-odds-api/)
+- [The Odds Events Participants API](https://apis.io/collections/the-odds-api/open-the-odds-api-participants-api/)
+- [The Odds Events Scores API](https://apis.io/collections/the-odds-api/open-the-odds-api-scores-api/)
+- [The Odds Events Sports API](https://apis.io/collections/the-odds-api/open-the-odds-api-sports-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [The Odds API — jsonschema rules](https://apis.io/rules/the-odds-api/the-odds-api-jsonschema-spectral-rules/)
+- [The Odds API API Rules](https://apis.io/rules/the-odds-api/the-odds-api-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [The Odds Api Authentication](https://apis.io/security/the-odds-api/the-odds-api-authentication/)
+- [The Odds Api Domain Security](https://apis.io/security/the-odds-api/the-odds-api-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [The Odds Api Plans Pricing](https://apis.io/plans/the-odds-api/the-odds-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [The Odds Api Rate Limits](https://apis.io/rate-limits/the-odds-api/the-odds-api-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [The Odds Api Finops](https://apis.io/finops/the-odds-api/the-odds-api-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://the-odds-api.com/)
 - [Documentation](https://the-odds-api.com/liveapi/guides/v4/)
-- [Sign Up](https://the-odds-api.com/#get-access)
-- [GitHub Organization](https://github.com/the-odds-api)
-- [Status Page](https://status.the-odds-api.com/)
-- [Plans](plans/the-odds-api-plans-pricing.yml)
-- [Rate Limits](rate-limits/the-odds-api-rate-limits.yml)
-- [Fin Ops](finops/the-odds-api-finops.yml)
-- [Spectral Ruleset](rules/the-odds-api-rules.yml)
-- [JSON Schema](json-schema/the-odds-api-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/the-odds-api-context.jsonld)
-- [Vocabulary](vocabulary/the-odds-api-vocabulary.yml)
+- [GitHub](https://github.com/the-odds-api)
+- [Status](https://status.the-odds-api.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 38.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.4 |
+| Contract governance | 27.3 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 21.1 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/the-odds-api/](https://apis.io/providers/the-odds-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for The Odds API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/the-odds-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
